@@ -1,4 +1,6 @@
 SsEditor::Application.routes.draw do
+  resources :characters
+
   resources :stories
 
   # The priority is based upon order of creation:
