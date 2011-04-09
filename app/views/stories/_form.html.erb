@@ -1,16 +1,13 @@
 <%= form_for(@story) do |f| %>
-  <% if @story.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
-
-      <ul>
-      <% @story.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= f.error_messages %>
+  <div class="field">
+    <%= f.label :title, "タイトル" %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.check_box :hidden %>
+    <%= f.label :hidden, "非公開にする" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
