@@ -4,6 +4,7 @@ class CreateCharacters < ActiveRecord::Migration
       t.string :name, :null => :false
       t.timestamps
     end
+    add_index :characters, :name, :unique => true
   end
 
   def self.down

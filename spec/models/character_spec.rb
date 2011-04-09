@@ -15,5 +15,10 @@ describe Character do
       subject { Character.new }
       it { should_not be_valid }
     end
+    describe "nameはユニーク" do
+      fixtures :characters
+      subject { Character.new(:name => 'hage') }
+      it { should_not be_valid }
+    end
   end
 end
