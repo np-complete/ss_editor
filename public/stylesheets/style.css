@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: block;
+    margin: 0;
+    padding: 10px 20px;
+    background-color: #dddddd;
+}
+
+header > h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+header > h1 > a {
+    text-decoration: none;
+}
+
+header > h1 > a:hover {
+    background-color: transparent;
+    color: #333336;
+}
+
+#main {
+    margin: 10px 30px;
+}
