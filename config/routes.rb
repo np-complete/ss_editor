@@ -1,7 +1,7 @@
 SsEditor::Application.routes.draw do
-  resources :faces
-
-  resources :characters
+  resources :characters do
+    resources :faces
+  end
 
   resources :stories
 
