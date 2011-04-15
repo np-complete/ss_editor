@@ -6,6 +6,12 @@
 
 <header>
   <h1><%= link_to 'SS Editor', :root %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to 'stories', :stories %></li>
+      <li><%= link_to 'characters', :characters %></li>
+    </ul>
+  </nav>
 </header>
 <div id="main">
   <%= yield %>
