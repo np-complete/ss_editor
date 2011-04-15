@@ -2,9 +2,10 @@
 require 'spec_helper'
 
 describe Character do
+  fixtures :characters
   before do
     @valid_attributes = {
-      :name => 'hoge'
+      :name => '平沢唯'
     }
   end
   
@@ -16,8 +17,7 @@ describe Character do
       it { should_not be_valid }
     end
     describe "nameはユニーク" do
-      fixtures :characters
-      subject { Character.new(:name => 'hage') }
+      subject { Character.new(:name => '秋山澪') }
       it { should_not be_valid }
     end
   end
