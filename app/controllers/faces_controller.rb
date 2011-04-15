@@ -1,4 +1,5 @@
 class FacesController < ApplicationController
+  parent_resource :character
   # GET /faces
   # GET /faces.xml
   def index
