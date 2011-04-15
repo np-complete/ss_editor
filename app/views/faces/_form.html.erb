@@ -1,6 +1,9 @@
-<%= form_for(@character, @face) do |f| %>
+<%= form_for([@character, @face]) do |f| %>
   <%= f.error_messages %>
-
+  <div class="field">
+    <%= f.label :name, "アイコン名" %><br />
+    <%= f.text_field :name %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
