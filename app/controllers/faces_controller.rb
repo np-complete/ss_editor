@@ -45,7 +45,7 @@ class FacesController < ApplicationController
 
     respond_to do |format|
       if @face.save
-        format.html { redirect_to(@face, :notice => 'Face was successfully created.') }
+        format.html { redirect_to([@character, @face], :notice => 'Face was successfully created.') }
         format.xml  { render :xml => @face, :status => :created, :location => @face }
       else
         format.html { render :action => "new" }
@@ -61,7 +61,7 @@ class FacesController < ApplicationController
 
     respond_to do |format|
       if @face.update_attributes(params[:face])
-        format.html { redirect_to(@face, :notice => 'Face was successfully updated.') }
+        format.html { redirect_to([@character, @face], :notice => 'Face was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -77,7 +77,7 @@ class FacesController < ApplicationController
     @face.destroy
 
     respond_to do |format|
-      format.html { redirect_to(faces_url) }
+      format.html { redirect_to([@character, :faces]) }
       format.xml  { head :ok }
     end
   end
