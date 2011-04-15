@@ -3,7 +3,7 @@ class FacesController < ApplicationController
   # GET /faces
   # GET /faces.xml
   def index
-    @faces = Face.all
+    @faces = @character.faces
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class FacesController < ApplicationController
   # GET /faces/1
   # GET /faces/1.xml
   def show
-    @face = Face.find(params[:id])
+    @face = @character.faces.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class FacesController < ApplicationController
   # GET /faces/new
   # GET /faces/new.xml
   def new
-    @face = Face.new
+    @face = @character.faces.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class FacesController < ApplicationController
 
   # GET /faces/1/edit
   def edit
-    @face = Face.find(params[:id])
+    @face = @character.faces.find(params[:id])
   end
 
   # POST /faces
   # POST /faces.xml
   def create
-    @face = Face.new(params[:face])
+    @face = @character.faces.new(params[:face])
 
     respond_to do |format|
       if @face.save
@@ -57,7 +57,7 @@ class FacesController < ApplicationController
   # PUT /faces/1
   # PUT /faces/1.xml
   def update
-    @face = Face.find(params[:id])
+    @face = @character.faces.find(params[:id])
 
     respond_to do |format|
       if @face.update_attributes(params[:face])
@@ -73,7 +73,7 @@ class FacesController < ApplicationController
   # DELETE /faces/1
   # DELETE /faces/1.xml
   def destroy
-    @face = Face.find(params[:id])
+    @face = @character.faces.find(params[:id])
     @face.destroy
 
     respond_to do |format|
