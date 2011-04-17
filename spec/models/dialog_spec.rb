@@ -25,4 +25,17 @@ describe Dialog do
       end
     end
   end
+  
+  describe "#set_default_line_num" do
+    it "同じStoryのDialogうち一番大きいline_num + 1が line_num に設定される" do
+      dialog = Dialog.new(:story => stories(:ritsu_x_mio))
+      dialog.send(:set_default_line_num)
+      dialog.line_num.should be(2)
+    end
+    it "同じStoryのDialogが存在しない場合 line_num が1に設定される" do
+      dialog = Dialog.new(:story => stories(:yui_x_azu))
+      dialog.send(:set_default_line_num)
+      dialog.line_num.should be(1)
+    end
+  end
 end
