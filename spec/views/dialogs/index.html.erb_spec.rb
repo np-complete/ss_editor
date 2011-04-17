@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "dialogs/index.html.erb" do
   before(:each) do
+    assign(:story, stub_model(Story))
     assign(:dialogs, [
       stub_model(Dialog),
       stub_model(Dialog)
