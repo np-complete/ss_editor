@@ -16,14 +16,6 @@ describe Dialog do
   describe "#valid?" do
     subject { Dialog.new(@valid_attributes) }
     it { should be_valid }
-    describe "[story, line_num]はunique" do
-      subject { Dialog.new(@valid_attributes.merge(:line_num => 1)) }
-      it { should_not be_valid }
-      describe "story_idが違えば大丈夫" do
-        subject { Dialog.new(@valid_attributes.merge(:line_num => 1, :story => stories(:yui_x_azu))) }
-        it { should be_valid }
-      end
-    end
   end
   
   describe "#set_default_line_num" do
