@@ -1,4 +1,6 @@
 SsEditor::Application.routes.draw do
+  resources :dialogs
+
   resources :characters do
     resources :faces
   end
