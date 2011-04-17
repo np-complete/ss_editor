@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>line</th>
     <th>キャラクター</th>
     <th>顔</th>
     <th>セリフ</th>
@@ -12,6 +13,7 @@
   
   <% @dialogs.each do |dialog| %>
     <tr>
+      <td><%= dialog.line_num %></td>
       <td><%= dialog.character.name %></td>
       <td><%= dialog.face.name %></td>
       <td><%= dialog.message %></td>
