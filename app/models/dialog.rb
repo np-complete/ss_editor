@@ -6,6 +6,8 @@ class Dialog < ActiveRecord::Base
   belongs_to :character
   belongs_to :face
   
+  before_validation :set_default_line_num, :on => :create
+  
   private
   def set_default_line_num
     self.line_num = (Dialog.where(:story_id => story_id).maximum(:line_num) || 0) + 1 if story_id.present?
