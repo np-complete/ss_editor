@@ -2,6 +2,9 @@
 
 <table>
   <tr>
+    <th>キャラクター</th>
+    <th>顔</th>
+    <th>セリフ</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +12,9 @@
   
   <% @dialogs.each do |dialog| %>
     <tr>
+      <td><%= dialog.character.name %></td>
+      <td><%= dialog.face.name %></td>
+      <td><%= dialog.message %></td>
       <td><%= link_to 'Show', [@story, dialog] %></td>
       <td><%= link_to 'Edit', [:edit, @story, dialog] %></td>
       <td><%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %></td>

@@ -2,6 +2,7 @@
 
 <article>
   <h1><%= @story.title %></h1>
+  <%= link_to 'Dialogs', [@story, :dialogs] %> |
   <%= link_to 'Edit', edit_story_path(@story) %> |
   <%= link_to 'Back', stories_path %>
 </article>

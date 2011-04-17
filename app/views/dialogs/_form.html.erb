@@ -1,5 +1,21 @@
 <%= form_for([@story, @dialog]) do |f| %>
   <%= f.error_messages %>
+  <div class="field">
+    <%= f.label :character_id, "キャラクター" %><br />
+    <%= f.select :character_id, Character.all.map{|x| [x.name, x.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :face_id, "顔アイコン" %><br />
+    <%= f.select :face_id, Face.all.map{|x| [x.name, x.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :message, "メッセージ" %><br />
+    <%= f.text_field :message %>
+  </div>
+  <div class="field">
+    <%= f.label :line_num, "行" %><br />
+    <%= f.text_field :line_num %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
