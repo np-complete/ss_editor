@@ -4,31 +4,31 @@ describe DialogsController do
   describe "routing" do
 
     it "recognizes and generates #index" do
-      { :get => "/dialogs" }.should route_to(:controller => "dialogs", :action => "index")
+      { :get => "/stories/2/dialogs" }.should route_to(:controller => "dialogs", :action => "index", :story_id => "2")
     end
 
     it "recognizes and generates #new" do
-      { :get => "/dialogs/new" }.should route_to(:controller => "dialogs", :action => "new")
+      { :get => "/stories/2/dialogs/new" }.should route_to(:controller => "dialogs", :action => "new", :story_id => "2")
     end
 
     it "recognizes and generates #show" do
-      { :get => "/dialogs/1" }.should route_to(:controller => "dialogs", :action => "show", :id => "1")
+      { :get => "/stories/2/dialogs/1" }.should route_to(:controller => "dialogs", :action => "show", :id => "1", :story_id => "2")
     end
 
     it "recognizes and generates #edit" do
-      { :get => "/dialogs/1/edit" }.should route_to(:controller => "dialogs", :action => "edit", :id => "1")
+      { :get => "/stories/2/dialogs/1/edit" }.should route_to(:controller => "dialogs", :action => "edit", :id => "1", :story_id => "2")
     end
 
     it "recognizes and generates #create" do
-      { :post => "/dialogs" }.should route_to(:controller => "dialogs", :action => "create")
+      { :post => "/stories/2/dialogs" }.should route_to(:controller => "dialogs", :action => "create", :story_id => "2")
     end
 
     it "recognizes and generates #update" do
-      { :put => "/dialogs/1" }.should route_to(:controller => "dialogs", :action => "update", :id => "1")
+      { :put => "/stories/2/dialogs/1" }.should route_to(:controller => "dialogs", :action => "update", :id => "1", :story_id => "2")
     end
 
     it "recognizes and generates #destroy" do
-      { :delete => "/dialogs/1" }.should route_to(:controller => "dialogs", :action => "destroy", :id => "1")
+      { :delete => "/stories/2/dialogs/1" }.should route_to(:controller => "dialogs", :action => "destroy", :id => "1", :story_id => "2")
     end
 
   end

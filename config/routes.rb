@@ -1,12 +1,12 @@
 SsEditor::Application.routes.draw do
-  resources :dialogs
-
   resources :characters do
     resources :faces
   end
 
-  resources :stories
-
+  resources :stories do
+    resources :dialogs
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
