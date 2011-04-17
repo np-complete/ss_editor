@@ -30,6 +30,9 @@ describe DialogsController do
     it "recognizes and generates #destroy" do
       { :delete => "/stories/2/dialogs/1" }.should route_to(:controller => "dialogs", :action => "destroy", :id => "1", :story_id => "2")
     end
-
+    
+    it "regognizes and generates #change_faces" do
+      { :get => "/stories/2/dialogs/change_faces" }.should route_to(:controller => "dialogs", :action => "change_faces", :story_id => "2")
+    end
   end
 end

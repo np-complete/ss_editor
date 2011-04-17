@@ -4,7 +4,11 @@ SsEditor::Application.routes.draw do
   end
 
   resources :stories do
-    resources :dialogs
+    resources :dialogs do
+      collection do
+        get :change_faces
+      end
+    end
   end
   
   # The priority is based upon order of creation:
