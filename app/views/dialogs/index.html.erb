@@ -6,16 +6,16 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @dialogs.each do |dialog| %>
-  <tr>
-    <td><%= link_to 'Show', dialog %></td>
-    <td><%= link_to 'Edit', edit_dialog_path(dialog) %></td>
-    <td><%= link_to 'Destroy', dialog, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  
+  <% @dialogs.each do |dialog| %>
+    <tr>
+      <td><%= link_to 'Show', [@story, dialog] %></td>
+      <td><%= link_to 'Edit', [:edit, @story, dialog] %></td>
+      <td><%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Dialog', new_dialog_path %>
+<%= link_to 'New Dialog', [:new, @story, :dialog] %>

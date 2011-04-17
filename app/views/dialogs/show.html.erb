@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
 
 
-<%= link_to 'Edit', edit_dialog_path(@dialog) %> |
-<%= link_to 'Back', dialogs_path %>
+<%= link_to 'Edit', [:edit, @story, @dialog] %> |
+<%= link_to 'Back', [@story, :dialogs] %>

@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @dialog %> |
-<%= link_to 'Back', dialogs_path %>
+<%= link_to 'Show', [@story, @dialog] %> |
+<%= link_to 'Back', [@story, :dialogs] %>
