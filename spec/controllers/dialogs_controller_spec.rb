@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe DialogsController do
@@ -114,6 +115,25 @@ describe DialogsController do
       mock_story.stub_chain(:dialogs, :find) { mock_dialog }
       delete :destroy, :id => "1", :story_id => "2"
       response.should redirect_to(story_dialogs_url(mock_story))
+    end
+  end
+  
+  describe "GET change_faces" do
+    describe "character_id が指定された場合" do
+      it "character_idの顔一覧が@facesにアサインされる" do
+        Character.stub(:find).with("37") {
+          mock_character(:faces => [mock_face(:name => "Hoge")])
+        }
+        xhr :get, :change_faces, :story_id => "2", :character_id => "37"
+        assigns[:faces].should eq([mock_face])
+      end
+    end
+    
+    describe "character_id が指定されてない場合" do
+      it "空の配列が@facesにアサインされる" do
+        xhr :get, :change_faces, :story_id => "2", :character_id => ""
+        assigns[:faces].should eq([])
+      end
     end
   end
 end
