@@ -6,7 +6,11 @@ describe DialogsController do
     it "recognizes and generates #index" do
       { :get => "/stories/2/dialogs" }.should route_to(:controller => "dialogs", :action => "index", :story_id => "2")
     end
-
+    
+    it "recognizes and generates #update_order" do
+      { :put => "/stories/2/dialogs/update_orders" }.should route_to(:controller => "dialogs", :action => "update_orders", :story_id => "2")
+    end
+    
     it "recognizes and generates #new" do
       { :get => "/stories/2/dialogs/new" }.should route_to(:controller => "dialogs", :action => "new", :story_id => "2")
     end

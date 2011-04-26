@@ -7,6 +7,7 @@ SsEditor::Application.routes.draw do
     resources :dialogs do
       collection do
         get :change_faces
+        put :update_orders
       end
     end
   end
