@@ -1,4 +1,14 @@
 <h1>Listing dialogs</h1>
+ 
+<ul id="dialogs">
+  <% @dialogs.each do |dialog| %>
+    <li id="dialog_<%= dialog.id %>">
+      <%= dialog.message %>
+    </li>
+  <% end %>
+</ul>
+
+<%= sortable_element :dialogs, :url => [:update_orders, @story, :dialogs], :method => :put %>
 
 <table>
   <tr>
