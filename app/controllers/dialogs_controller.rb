@@ -14,7 +14,7 @@ class DialogsController < ApplicationController
   
   def update_orders
     Dialog.transaction do
-      if @story.update_orders!(params[:dialogs].map(&:to_i))
+      if @story.update_dialog_orders!(params[:dialogs].map(&:to_i))
         render :text => 'ok'
       else
         render :text => 'ng'

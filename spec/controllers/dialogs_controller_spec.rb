@@ -15,13 +15,13 @@ describe DialogsController do
   end
   
   describe "PUT update_orders" do
-    it "@story should recieve update_orders!" do
-      mock_story.should_receive(:update_orders!).with([1,2,3,4]) { true }
+    it "@story should recieve update_dialog_orders!" do
+      mock_story.should_receive(:update_dialog_orders!).with([1,2,3,4]) { true }
       put :update_orders, :story_id => "2", :dialogs => ["1","2","3","4"]
     end
     describe "success" do
       it "render 'ok'" do
-        mock_story.stub(:update_orders!) { true }
+        mock_story.stub(:update_dialog_orders!) { true }
         put :update_orders, :story_id => "2", :dialogs => []
         response.body.should eq("ok")
       end
@@ -29,7 +29,7 @@ describe DialogsController do
     
     describe "failure" do
       it "render 'ng'" do
-        mock_story.stub(:update_orders!) { false }
+        mock_story.stub(:update_dialog_orders!) { false }
         put :update_orders, :story_id => "2", :dialogs => []
         response.body.should eq("ng")
       end
