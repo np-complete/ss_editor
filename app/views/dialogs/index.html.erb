@@ -1,38 +1,22 @@
 <h1>Listing dialogs</h1>
- 
-<ul id="dialogs">
+
+<div id="dialogs" class="dialogs">
   <% @dialogs.each do |dialog| %>
-    <li id="dialog_<%= dialog.id %>">
+    <div id="dialogs_<%= dialog.id %>" class="dialog">
+      <%= dialog.character.name %>
+      <%= dialog.face.name %>
       <%= dialog.message %>
-    </li>
+      <footer>
+        <%= link_to 'Show', [@story, dialog] %>
+        <%= link_to 'Edit', [:edit, @story, dialog] %>
+        <%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %>
+      </footer>
+    </div>
   <% end %>
-</ul>
+</div>
 
-<%= sortable_element :dialogs, :url => [:update_orders, @story, :dialogs], :method => :put %>
+<%= sortable_element :dialogs, :tag => :div, :url => [:update_orders, @story, :dialogs], :method => :put %>
 
-<table>
-  <tr>
-    <th>line</th>
-    <th>キャラクター</th>
-    <th>顔</th>
-    <th>セリフ</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  
-  <% @dialogs.each do |dialog| %>
-    <tr>
-      <td><%= dialog.line_num %></td>
-      <td><%= dialog.character.name %></td>
-      <td><%= dialog.face.name %></td>
-      <td><%= dialog.message %></td>
-      <td><%= link_to 'Show', [@story, dialog] %></td>
-      <td><%= link_to 'Edit', [:edit, @story, dialog] %></td>
-      <td><%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
 
 <br />
 

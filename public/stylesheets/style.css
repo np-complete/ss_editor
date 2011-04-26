@@ -27,3 +27,15 @@ header > h1 > a:hover {
 #main {
     margin: 10px 30px;
 }
+
+
+.dialogs {
+    border: 10px solid #f0f0f0;
+}
+
+.dialogs .dialog {
+    border :1px dotted #c0c0c0;
+    border-left: 24px solid #c0c0f0;
+    padding: 5px 10px;
+    margin: 10px;
+}
