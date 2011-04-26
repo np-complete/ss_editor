@@ -4,3 +4,24 @@ story_1_line_1:
   face: ritsu_ahegao
   line_num: 1
   message: 'おでこペロペロらめぇーーー'
+
+yuiui_line_1:
+  story: yui_x_ui
+  character: ritsu_tainaka
+  face: ritsu_ahegao
+  line_num: 1
+  message: '1行目1行目'
+
+yuiui_line_2:
+  story: yui_x_ui
+  character: ritsu_tainaka
+  face: ritsu_ahegao
+  line_num: 2
+  message: '2行目2行目'
+
+yuiui_line_3:
+  story: yui_x_ui
+  character: ritsu_tainaka
+  face: ritsu_ahegao
+  line_num: 3
+  message: '3行目3行目'
