@@ -13,6 +13,28 @@ describe DialogsController do
       assigns(:dialogs).should eq([mock_dialog])
     end
   end
+  
+  describe "PUT update_orders" do
+    it "@story should recieve update_orders!" do
+      mock_story.should_receive(:update_orders!).with([1,2,3,4]) { true }
+      put :update_orders, :story_id => "2", :dialogs => ["1","2","3","4"]
+    end
+    describe "success" do
+      it "render 'ok'" do
+        mock_story.stub(:update_orders!) { true }
+        put :update_orders, :story_id => "2", :dialogs => []
+        response.body.should eq("ok")
+      end
+    end
+    
+    describe "failure" do
+      it "render 'ng'" do
+        mock_story.stub(:update_orders!) { false }
+        put :update_orders, :story_id => "2", :dialogs => []
+        response.body.should eq("ng")
+      end
+    end
+  end
 
   describe "GET show" do
     it "assigns the requested dialog as @dialog" do

@@ -11,6 +11,18 @@ class DialogsController < ApplicationController
       format.xml  { render :xml => @dialogs }
     end
   end
+  
+  def update_orders
+    Dialog.transaction do
+      if @story.update_orders!(params[:dialogs].map(&:to_i))
+        render :text => 'ok'
+      else
+        render :text => 'ng'
+      end
+    end
+  rescue
+    render :text => 'ng'
+  end
 
   # GET /dialogs/1
   # GET /dialogs/1.xml
