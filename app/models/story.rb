@@ -2,4 +2,13 @@ class Story < ActiveRecord::Base
   validates_presence_of :title
   
   has_many :dialogs, :order => 'line_num', :include => [:face, :character]
+  
+  def update_dialog_orders!(orders)
+    Dialog.update_all(['line_num = id + ?', dialogs.count],  ['story_id = ?', id])
+    dialogs.each do |dialog|
+      index = orders.index(dialog.id)
+      raise ActiveRecord::InvalidRecord unless index
+      dialog.update_attributes!(:line_num => index + 1)
+    end
+  end
 end
