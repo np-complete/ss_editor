@@ -25,6 +25,12 @@ describe Story do
       @order = [dialogs(:yuiui_line_3).id, dialogs(:yuiui_line_1).id, dialogs(:yuiui_line_2).id]
     end
     
+    it "daialogのすべてのidが引数に指定されていなかったら例外が出る" do
+      lambda{
+        @story.update_dialog_orders!([1,2])
+      }.should raise_error(Story::DialogOrderError)
+    end
+    
     describe "与えられたidの順にline_numが1から順にふられる" do
       it "line_1 のline_numが2になる" do
         dialog = @story.dialogs[0]
