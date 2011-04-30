@@ -10,10 +10,9 @@ gem 'dynamic_form'
 gem 'gravatar_image_tag'
 
 group :test, :development do
-  gem "rails_code_qa"
   gem "rspec-rails"
   gem "auto_mock"
   gem "webrat"
   gem "autotest"
-  gem "rcov"
+  gem "cover_me"
 end
