@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-=======
-$:.unshift(File.expand_path('./lib', ENV['rmv_path']))
->>>>>>> cecf0bed0406c70d44fa3dfe13b91665c6491ace
 require 'rvm/capistrano'
 set :rvm_ruby_string, 'ruby-1.9.2@ss_editor'
 set :rvm_type, :user
