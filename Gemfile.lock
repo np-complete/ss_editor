@@ -36,12 +36,12 @@ GEM
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
     builder (2.1.2)
-    capistrano (2.5.21)
+    capistrano (2.6.0)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.0.0)
+      net-ssh-gateway (>= 1.1.0)
     capistrano_colors (0.5.4)
     configatron (2.7.2)
       yamler (>= 0.1.0)
@@ -136,7 +136,7 @@ DEPENDENCIES
   cover_me
   dynamic_form
   gravatar_image_tag
-  mysql2 (= 0.2.7)
+  mysql2 (< 0.3.0)
   parent_resource
   rack-openid
   rails (= 3.0.3)
