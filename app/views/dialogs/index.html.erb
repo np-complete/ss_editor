@@ -3,8 +3,8 @@
 <div id="dialogs" class="dialogs">
   <% @dialogs.each do |dialog| %>
     <div id="dialogs_<%= dialog.id %>" class="dialog">
-      <%= dialog.character.name %>
-      <%= dialog.face.name %>
+      <%= image_tag dialog.face.icon.url(:thumb) %>
+      <%#= dialog.character.name %>
       <%= dialog.message %>
       <footer>
         <%= link_to 'Show', [@story, dialog] %>

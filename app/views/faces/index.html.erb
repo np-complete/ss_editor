@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>アイコン名</th>
+    <th>アイコン</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
   <% @faces.each do |face| %>
     <tr>
       <td><%= face.name %></td>
+      <td><%= image_tag face.icon.url(:thumb) %></td>
       <td><%= link_to 'Show', [@character, face] %></td>
       <td><%= link_to 'Edit', [:edit, @character, face] %></td>
       <td><%= link_to 'Destroy', [@character, face], :confirm => 'Are you sure?', :method => :delete %></td>

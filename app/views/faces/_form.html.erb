@@ -1,8 +1,12 @@
-<%= form_for([@character, @face]) do |f| %>
+<%= form_for([@character, @face], :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
   <div class="field">
     <%= f.label :name, "アイコン名" %><br />
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :icon, "ファイル" %><br />
+    <%= f.file_field :icon %>
   </div>
   <div class="actions">
     <%= f.submit %>
