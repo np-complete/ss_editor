@@ -71,6 +71,9 @@ GEM
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.4.4)
+    paperclip (2.3.11)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
     parent_resource (0.1.1)
       rails
     polyglot (0.3.1)
@@ -137,6 +140,7 @@ DEPENDENCIES
   dynamic_form
   gravatar_image_tag
   mysql2 (< 0.3.0)
+  paperclip
   parent_resource
   rack-openid
   rails (= 3.0.3)

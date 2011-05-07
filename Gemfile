@@ -9,6 +9,7 @@ gem 'rack-openid'
 gem 'ruby-openid-apps-discovery'
 gem 'dynamic_form'
 gem 'gravatar_image_tag'
+gem 'paperclip'
 
 group :test, :development do
   gem "rspec-rails"
