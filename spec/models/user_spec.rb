@@ -18,4 +18,10 @@ describe User do
       subject.should_not be_valid
     end
   end
+  
+  describe ".auth" do
+    it "openid_urlを探す" do
+      User.auth('nakano_azusa@example.com').should eq(users(:nakano_azusa))
+    end
+  end
 end
