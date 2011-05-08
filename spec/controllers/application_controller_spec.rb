@@ -17,6 +17,17 @@ describe ApplicationController do
     end
   end
   
+  describe "#identify?" do
+    it "セッションに identity_url があれば true" do
+      controller.session[:identity_url] = 'identity_url'
+      controller.send(:identify?).should be_true
+    end
+    it "セッションに identity_url がなければ false" do
+      controller.session[:identity_url] = nil
+      controller.send(:identify?).should be_false
+    end
+  end
+  
   describe "#login?" do
     it "@authが設定されていたらtrue" do
       controller.instance_variable_set(:@auth, mock_user)
