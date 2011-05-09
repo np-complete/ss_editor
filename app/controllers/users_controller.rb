@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def create
     if !login? && identify?
       @user = User.new(params[:user])
-      
+      @user.openid_url = session[:identity_url]
       respond_to do |format|
         if @user.save
           format.html { redirect_to(@user, :notice => 'User was successfully created.') }
