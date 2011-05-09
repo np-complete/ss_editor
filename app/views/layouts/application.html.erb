@@ -6,6 +6,14 @@
 
 <header>
   <h1><%= link_to 'SS Editor', :root %></h1>
+  
+  <div>
+    <% if login? %>
+      <%= link_to 'logout', :logout %>
+    <% else %>
+      <%= link_to 'login', :login %>
+    <% end %>
+  </div>
   <nav>
     <ul>
       <li><%= link_to 'stories', :stories %></li>
