@@ -49,7 +49,13 @@ describe UsersController do
   end
 
   describe "GET edit" do
+    it "login? がfalseならリダイレクト" do
+      controller.stub(:login?) { false }
+      get :edit, :id => "37"
+      response.should redirect_to(root_path)
+    end
     it "assigns the requested user as @user" do
+      controller.stub(:login?) { true }
       User.stub(:find).with("37") { mock_user }
       get :edit, :id => "37"
       assigns(:user).should be(mock_user)
