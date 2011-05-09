@@ -1,5 +1,13 @@
+# -*- coding: utf-8 -*-
 class DashboardController < ApplicationController
   def index
+    if login?
+      
+    elsif identify?
+      redirect_to [:new, :user]
+    else 
+      redirect_to :root
+    end
   end
   
   def login
