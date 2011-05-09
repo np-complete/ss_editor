@@ -63,31 +63,51 @@ describe UsersController do
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "assigns a newly created user as @user" do
-        User.stub(:new).with({'these' => 'params'}) { mock_user(:save => true) }
-        post :create, :user => {'these' => 'params'}
-        assigns(:user).should be(mock_user)
-      end
-
-      it "redirects to the created user" do
-        User.stub(:new) { mock_user(:save => true) }
-        post :create, :user => {}
-        response.should redirect_to(user_url(mock_user))
-      end
+    it "login? がtrueならリダイレクト" do
+      controller.stub(:login?) { true }
+      post :create
+      response.should redirect_to(root_path)
     end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved user as @user" do
-        User.stub(:new).with({'these' => 'params'}) { mock_user(:save => false) }
-        post :create, :user => {'these' => 'params'}
-        assigns(:user).should be(mock_user)
+    
+    it "identify? がfalseならリダイレクト" do
+      controller.stub(:identify?) { false }
+      post :create
+      response.should redirect_to(root_path)
+    end
+    
+    describe "状態が正しい場合" do 
+      before do
+        controller.stub(:login?) { false }
+        controller.stub(:identify?) { true }
+        controller.session[:identity_url] = 'authauth'
       end
-
-      it "re-renders the 'new' template" do
-        User.stub(:new) { mock_user(:save => false) }
-        post :create, :user => {}
-        response.should render_template("new")
+      describe "with valid params" do
+        
+        it "assigns a newly created user as @user" do
+          User.stub(:new).with({'these' => 'params'}) { mock_user(:save => true) }
+          post :create, :user => {'these' => 'params'}
+          assigns(:user).should be(mock_user)
+        end
+        
+        it "redirects to the created user" do
+          User.stub(:new) { mock_user(:save => true) }
+          post :create, :user => {}
+          response.should redirect_to(user_url(mock_user))
+        end
+      end
+      
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved user as @user" do
+          User.stub(:new).with({'these' => 'params'}) { mock_user(:save => false) }
+          post :create, :user => {'these' => 'params'}
+          assigns(:user).should be(mock_user)
+        end
+        
+        it "re-renders the 'new' template" do
+          User.stub(:new) { mock_user(:save => false) }
+          post :create, :user => {}
+          response.should render_template("new")
+        end
       end
     end
   end
