@@ -85,12 +85,13 @@ describe UsersController do
         
         it "assigns a newly created user as @user" do
           User.stub(:new).with({'these' => 'params'}) { mock_user(:save => true) }
+          mock_user.should_receive(:openid_url=).with('authauth')
           post :create, :user => {'these' => 'params'}
           assigns(:user).should be(mock_user)
         end
         
         it "redirects to the created user" do
-          User.stub(:new) { mock_user(:save => true) }
+          User.stub(:new) { mock_user(:save => true, :openid_url= => true) }
           post :create, :user => {}
           response.should redirect_to(user_url(mock_user))
         end
@@ -98,13 +99,13 @@ describe UsersController do
       
       describe "with invalid params" do
         it "assigns a newly created but unsaved user as @user" do
-          User.stub(:new).with({'these' => 'params'}) { mock_user(:save => false) }
+          User.stub(:new).with({'these' => 'params'}) { mock_user(:save => false, :openid_url= => true) }
           post :create, :user => {'these' => 'params'}
           assigns(:user).should be(mock_user)
         end
         
         it "re-renders the 'new' template" do
-          User.stub(:new) { mock_user(:save => false) }
+          User.stub(:new) { mock_user(:save => false, :openid_url= => true) }
           post :create, :user => {}
           response.should render_template("new")
         end
