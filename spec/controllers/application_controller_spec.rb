@@ -38,4 +38,16 @@ describe ApplicationController do
       controller.send(:login?).should be_false
     end
   end
+  
+  describe "#only_login" do
+    it "login? がfalse ならエラー画面" do
+      controller.stub(:login?) { false }
+      controller.should_receive(:render).with('shared/error')
+      controller.send(:only_login).should be_false
+    end
+    it "login? がtrueなら trueを返す" do
+      controller.stub(:login?) { true }
+      controller.send(:only_login).should be_true
+    end
+  end
 end

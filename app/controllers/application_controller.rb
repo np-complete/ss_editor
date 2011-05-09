@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
   def login?
     @auth.present?
   end
+  
+  def only_login
+    return true if login?
+    render 'shared/error'
+    false
+  end
 end
