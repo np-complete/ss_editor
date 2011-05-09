@@ -1,4 +1,6 @@
 class StoriesController < ApplicationController
+  before_filter :only_login, :only => [:create, :new, :edit, :update, :delete]
+  
   # GET /stories
   # GET /stories.xml
   def index
