@@ -22,4 +22,12 @@ describe Face do
       it { should_not be_valid }
     end
   end
+  
+  describe "#url" do
+    it "icon.url(:thumb)が呼ばれる" do
+      face = faces(:ritsu_ahegao)
+      face.stub_chain(:icon, :url).with(:thumb) { 'unko' }
+      face.url.should eq('unko')
+    end
+  end
 end
