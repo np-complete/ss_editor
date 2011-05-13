@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :only_not_login, :only => [:new, :create]
+  
   # GET /users
   # GET /users.xml
   def index
@@ -24,17 +26,11 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.xml
   def new
-    if login?
-      redirect_to :dashboard
-    elsif !identify?
-      redirect_to :root
-    else
-      @user = User.new
-      
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @user }
-      end
+    @user = User.new
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @user }
     end
   end
 
@@ -50,20 +46,16 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-    if !login? && identify?
-      @user = User.new(params[:user])
-      @user.openid_url = session[:identity_url]
-      respond_to do |format|
-        if @user.save
-          format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-          format.xml  { render :xml => @user, :status => :created, :location => @user }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        end
+    @user = User.new(params[:user])
+    @user.openid_url = session[:identity_url]
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
-    else
-      redirect_to :root
     end
   end
 
