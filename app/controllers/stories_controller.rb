@@ -43,7 +43,7 @@ class StoriesController < ApplicationController
   # POST /stories.xml
   def create
     @story = Story.new(params[:story])
-
+    @story.user_id = @auth.id
     respond_to do |format|
       if @story.save
         format.html { redirect_to(@story, :notice => 'Story was successfully created.') }

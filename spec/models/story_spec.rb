@@ -2,18 +2,26 @@
 require 'spec_helper'
 
 describe Story do
+  fixtures :stories, :users
   before do
     @valid_attributes = {
-      :title => 'ほげ'
+      :title => 'ほげ',
+      :user => users(:nakano_azusa)
     }
   end
   
   describe "#valid?" do
-    subject { Story.new(@valid_attributes) }
+    before { @story = Story.new(@valid_attributes) }
+    subject { @story }
     it { should be_valid }
     its(:save) { should be_true }
+    
     describe "titleは必須" do
-      subject { Story.new }
+      subject { @story.title = nil; @story }
+      it { should_not be_valid }
+    end
+    describe "user_idは必須" do
+      subject { @story.user_id = nil; @story }
       it { should_not be_valid }
     end
   end

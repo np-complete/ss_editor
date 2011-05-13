@@ -1,7 +1,8 @@
 class Story < ActiveRecord::Base
-  validates_presence_of :title
+  validates_presence_of :title, :user_id
   
   has_many :dialogs, :order => 'line_num', :include => [:face, :character]
+  belongs_to :user
   
   def update_dialog_orders!(orders)
     Dialog.update_all(['line_num = id + ?', dialogs.count],  ['story_id = ?', id])
