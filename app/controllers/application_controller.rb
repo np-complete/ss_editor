@@ -20,8 +20,14 @@ class ApplicationController < ActionController::Base
   end
   
   def only_login
-    return true if login?
-    render 'shared/error'
-    false
+    access_controll(lambda{ login? })
+  end
+  
+  def only_not_login
+    access_controll(lambda{ !login? })
+  end
+  
+  def access_controll(proc)
+    render 'shared/access_failure' unless proc.call
   end
 end
