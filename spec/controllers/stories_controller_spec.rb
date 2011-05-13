@@ -9,7 +9,11 @@ describe StoriesController do
   def mock_story(stubs={})
     @mock_story ||= mock_model(Story, stubs).as_null_object
   end
-
+  
+  before do
+    controller.instance_variable_set(:@auth, mock_user(:id => 27))
+  end
+  
   describe "GET index" do
     it "assigns all stories as @stories" do
       Story.stub(:all) { [mock_story] }
@@ -46,12 +50,13 @@ describe StoriesController do
     describe "with valid params" do
       it "assigns a newly created story as @story" do
         Story.stub(:new).with({'these' => 'params'}) { mock_story(:save => true) }
+        mock_story.should_recieve(:user_id=).with(27)
         post :create, :story => {'these' => 'params'}
         assigns(:story).should be(mock_story)
       end
 
       it "redirects to the created story" do
-        Story.stub(:new) { mock_story(:save => true) }
+        Story.stub(:new) { mock_story(:save => true, :user_id= => true) }
         post :create, :story => {}
         response.should redirect_to(story_url(mock_story))
       end
@@ -59,13 +64,13 @@ describe StoriesController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved story as @story" do
-        Story.stub(:new).with({'these' => 'params'}) { mock_story(:save => false) }
+        Story.stub(:new).with({'these' => 'params'}) { mock_story(:save => false, :user_id= => true) }
         post :create, :story => {'these' => 'params'}
         assigns(:story).should be(mock_story)
       end
 
       it "re-renders the 'new' template" do
-        Story.stub(:new) { mock_story(:save => false) }
+        Story.stub(:new) { mock_story(:save => false, :user_id= => true) }
         post :create, :story => {}
         response.should render_template("new")
       end
