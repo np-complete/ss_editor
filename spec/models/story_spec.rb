@@ -16,13 +16,13 @@ describe Story do
     it { should be_valid }
     its(:save) { should be_true }
     
-    describe "titleは必須" do
-      subject { @story.title = nil; @story }
-      it { should_not be_valid }
+    it "titleは必須" do
+      subject.title = nil
+      subject.should_not be_valid
     end
-    describe "user_idは必須" do
-      subject { @story.user_id = nil; @story }
-      it { should_not be_valid }
+    it "user_idは必須" do
+      subject.user_id = nil
+      subject.should_not be_valid
     end
   end
   

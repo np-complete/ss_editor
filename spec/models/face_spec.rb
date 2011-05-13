@@ -13,13 +13,14 @@ describe Face do
   describe '#valid?' do
     subject { Face.new(@valid_attributes) }
     it { should be_valid }
-    describe "name は必須" do
-      subject { Face.new(:character => characters(:mio_akiyama)) }
-      it { should_not be_valid }
+    its(:save) { should be_true }
+    it "name は必須" do
+      subject.name = nil
+      subject.should_not be_valid
     end
-    describe "characeter_id は必須" do
-      subject { Face.new(:name => 'アヘ顔') }
-      it { should_not be_valid }
+    it "characeter_id は必須" do
+      subject.character_id = nil
+      subject.should_not be_valid
     end
   end
   

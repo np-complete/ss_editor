@@ -16,6 +16,7 @@ describe Dialog do
   describe "#valid?" do
     subject { Dialog.new(@valid_attributes) }
     it { should be_valid }
+    its(:save) { should be_true }
   end
   
   describe "#set_default_line_num" do

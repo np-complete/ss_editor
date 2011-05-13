@@ -12,13 +12,14 @@ describe Character do
   describe "#valid?" do
     subject { Character.new(@valid_attributes) }
     it { should be_valid }
-    describe "nameは必須" do
-      subject { Character.new }
-      it { should_not be_valid }
+    its(:save) { should be_true }
+    it "nameは必須" do
+      subject.name = nil
+      subject.should_not be_valid
     end
-    describe "nameはユニーク" do
-      subject { Character.new(:name => '秋山澪') }
-      it { should_not be_valid }
+    it "nameはユニーク" do
+      subject.name = '秋山澪'
+      subject.should_not be_valid
     end
   end
 end

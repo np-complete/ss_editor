@@ -13,6 +13,7 @@ describe User do
   describe "#valid?" do
     subject { User.new(@valid_attributes) }
     it { should be_valid }
+    its(:save) { should be_true }
     it "openid_urlはunique" do
       subject.openid_url = 'takuan@yuri.net'
       subject.should_not be_valid
