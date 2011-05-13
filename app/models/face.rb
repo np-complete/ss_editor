@@ -3,4 +3,8 @@ class Face < ActiveRecord::Base
   validates_presence_of :name, :character_id
   
   belongs_to :character
+  
+  def url
+    icon.url(:thumb)
+  end
 end
