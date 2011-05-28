@@ -5,13 +5,15 @@
 <%= csrf_meta_tag %>
 
 <header>
-  <h1><%= link_to 'SS Editor', :root %></h1>
-  
-  <div>
+  <h1 id="logo"><%= link_to 'SS Editor', :root %></h1>
+  <div id="status">
     <% if login? %>
-      <%= link_to 'logout', :logout %>
+      <strong><%= @auth.name %></strong>
+      | <%= link_to 'ダッシュボード', :dashboard %>
+      | <%= link_to 'ログアウト', :logout %>
     <% else %>
-      <%= link_to 'login', :login %>
+      <strong>ログインしていません</strong>
+      | <%= link_to 'ログイン', :login %>
     <% end %>
   </div>
   <nav>

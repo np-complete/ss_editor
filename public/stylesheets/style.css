@@ -10,11 +10,17 @@ header {
     background-color: #dddddd;
 }
 
-header > h1 {
+h1#logo {
     margin: 0;
     padding: 0;
     line-height: 1;
+    float: left;
 }
+
+#status {
+    text-align: right;
+}
+
 header > h1 > a {
     text-decoration: none;
 }
@@ -27,7 +33,6 @@ header > h1 > a:hover {
 #main {
     margin: 10px 30px;
 }
-
 
 .dialogs {
     border: 10px solid #f0f0f0;
