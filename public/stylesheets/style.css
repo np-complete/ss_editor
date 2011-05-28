@@ -44,3 +44,14 @@ header > h1 > a:hover {
     padding: 5px 10px;
     margin: 10px;
 }
+
+.horizontal {
+    -webkit-box-orient: horizontal;
+    -moz-box-orieng: horizontal;
+    -ms-box-orient:horizontal;
+    -o-box-orient:horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
+}
