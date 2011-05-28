@@ -1,10 +1,10 @@
 class StoriesController < ApplicationController
   before_filter :only_login, :only => [:create, :new, :edit, :update, :delete]
-  
+
   # GET /stories
   # GET /stories.xml
   def index
-    @stories = Story.all
+    @stories = Story.all(:include => :user)
 
     respond_to do |format|
       format.html # index.html.erb
