@@ -35,10 +35,30 @@ header > h1 > a:hover {
 }
 
 .dialogs {
+    padding: 0px 20px;
+    width: 80%;
+}
+.dialogs .dialog {
+    border: 3px solid #eeeeee;
+    padding: 7px 7px 12px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.dialogs .dialog .message {
+    border-top: 12px;
+    font-size: 180%;
+    margin-left: 12px;
+    width: 90%;
+    line-height: 1.2;
+    text-align:top;
+}
+
+.admin_dialogs {
     border: 10px solid #f0f0f0;
 }
 
-.dialogs .dialog {
+.admin_dialogs .dialog {
     border :1px dotted #c0c0c0;
     border-left: 24px solid #c0c0f0;
     padding: 5px 10px;
