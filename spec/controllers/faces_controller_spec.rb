@@ -3,6 +3,7 @@ require 'spec_helper'
 describe FacesController do
   before do
     Character.stub(:find).with("1") { mock_character }
+    controller.instance_variable_set(:@auth, mock_user(:id => 27))
   end
 
   describe "GET index" do
@@ -41,12 +42,13 @@ describe FacesController do
     describe "with valid params" do
       it "assigns a newly created face as @face" do
         mock_character.stub_chain(:faces, :new).with({'these' => 'params'}) { mock_face(:save => true) }
+        mock_face.should_receive(:user_id=).with(27)
         post :create, :face => {'these' => 'params'}, :character_id => "1"
         assigns(:face).should be(mock_face)
       end
 
       it "redirects to the created face" do
-        mock_character.stub_chain(:faces, :new) { mock_face(:save => true) }
+        mock_character.stub_chain(:faces, :new) { mock_face(:save => true, :user_id= => true) }
         post :create, :face => {}, :character_id => "1"
         response.should redirect_to(character_face_url(mock_character, mock_face))
       end
@@ -54,13 +56,13 @@ describe FacesController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved face as @face" do
-        mock_character.stub_chain(:faces, :new).with({'these' => 'params'}) { mock_face(:save => false) }
+        mock_character.stub_chain(:faces, :new).with({'these' => 'params'}) { mock_face(:save => false, :user_id= => true) }
         post :create, :face => {'these' => 'params'}, :character_id => "1"
         assigns(:face).should be(mock_face)
       end
 
       it "re-renders the 'new' template" do
-        mock_character.stub_chain(:faces, :new) { mock_face(:save => false) }
+        mock_character.stub_chain(:faces, :new) { mock_face(:save => false, :user_id= => true) }
         post :create, :face => {}, :character_id => "1"
         response.should render_template("new")
       end
