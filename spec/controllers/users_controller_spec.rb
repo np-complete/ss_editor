@@ -2,11 +2,6 @@
 require 'spec_helper'
 
 describe UsersController do
-
-  def mock_user(stubs={})
-    @mock_user ||= mock_model(User, stubs).as_null_object
-  end
-
   describe "GET index" do
     it "assigns all users as @users" do
       User.stub(:all) { [mock_user] }
@@ -27,7 +22,7 @@ describe UsersController do
     before do
       controller.stub(:login?) { false }
     end
-    
+
     it "assigns a new user as @user" do
       controller.stub(:login?) { false }
       controller.stub(:identify?) { true }
@@ -57,14 +52,14 @@ describe UsersController do
       controller.stub(:identify?) { true }
       controller.session[:identity_url] = 'authauth'
     end
-    
+
     it "login? がtrueならエラー" do
       controller.stub(:login?) { true }
       User.should_not_receive(:new)
       post :create
       response.should render_template('shared/access_failure')
     end
-    
+
     describe "with valid params" do
       it "assigns a newly created user as @user" do
         User.stub(:new).with({'these' => 'params'}) { mock_user(:save => true) }
@@ -72,21 +67,21 @@ describe UsersController do
         post :create, :user => {'these' => 'params'}
         assigns(:user).should be(mock_user)
       end
-      
+
       it "redirects to the created user" do
         User.stub(:new) { mock_user(:save => true, :openid_url= => true) }
         post :create, :user => {}
         response.should redirect_to(user_url(mock_user))
       end
     end
-    
+
     describe "with invalid params" do
       it "assigns a newly created but unsaved user as @user" do
         User.stub(:new).with({'these' => 'params'}) { mock_user(:save => false, :openid_url= => true) }
         post :create, :user => {'these' => 'params'}
         assigns(:user).should be(mock_user)
       end
-      
+
       it "re-renders the 'new' template" do
         User.stub(:new) { mock_user(:save => false, :openid_url= => true) }
         post :create, :user => {}
@@ -94,7 +89,7 @@ describe UsersController do
       end
     end
   end
-  
+
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested user" do
