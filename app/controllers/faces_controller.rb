@@ -1,5 +1,7 @@
 class FacesController < ApplicationController
   parent_resource :character
+  before_filter :only_login
+
   # GET /faces
   # GET /faces.xml
   def index
@@ -42,7 +44,7 @@ class FacesController < ApplicationController
   # POST /faces.xml
   def create
     @face = @character.faces.new(params[:face])
-
+    @face.user_id = @auth.id
     respond_to do |format|
       if @face.save
         format.html { redirect_to([@character, @face], :notice => 'Face was successfully created.') }
