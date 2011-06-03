@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe "stories/show.html.erb" do
   before(:each) do
-    @story = assign(:story, stub_model(Story))
+    @story = assign(:story, stub_model(Story, :user => stub_model(User)))
+    @auth = assign(:auth, stub_model(User))
   end
 
   it "renders attributes in <p>" do

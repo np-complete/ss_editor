@@ -1,14 +1,10 @@
 require 'spec_helper'
 
 describe StoriesController do
-  def mock_story(stubs={})
-    @mock_story ||= mock_model(Story, stubs).as_null_object
-  end
-  
   before do
     controller.instance_variable_set(:@auth, mock_user(:id => 27))
   end
-  
+
   describe "GET index" do
     it "assigns all stories as @stories" do
       Story.stub(:all) { [mock_story] }

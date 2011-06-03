@@ -1,2 +1,8 @@
 <h1>DASHBOARD</h1>
 
+<h2>YOUR STORIES</h2>
+<ul>
+  <% @stories.each do |story| %>
+    <li><%= link_to story.title, story %></li>
+  <% end %>
+</ul>

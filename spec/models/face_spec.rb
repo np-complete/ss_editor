@@ -2,14 +2,15 @@
 require 'spec_helper'
 
 describe Face do
-  fixtures :faces, :characters
+  fixtures :faces, :characters, :users
   before do
     @valid_attributes = {
       :name => 'アヘ顔',
-      :character => characters(:mio_akiyama)
+      :character => characters(:mio_akiyama),
+      :user => users(:nakano_azusa)
     }
   end
-  
+
   describe '#valid?' do
     subject { Face.new(@valid_attributes) }
     it { should be_valid }
@@ -22,8 +23,12 @@ describe Face do
       subject.character_id = nil
       subject.should_not be_valid
     end
+    it "user_id は必須" do
+      subject.user_id = nil
+      subject.should_not be_valid
+    end
   end
-  
+
   describe "#url" do
     it "icon.url(:thumb)が呼ばれる" do
       face = faces(:ritsu_ahegao)

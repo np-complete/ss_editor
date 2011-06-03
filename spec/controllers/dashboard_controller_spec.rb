@@ -4,13 +4,23 @@ require 'spec_helper'
 describe DashboardController do
   describe "GET index" do
     describe "ログインしている場合" do
-      it "render index" do
+      before do
         controller.stub(:login?) { true }
+        controller.instance_variable_set(:@auth,
+          mock_user(:stories => [mock_story]))
+      end
+
+      it "render index" do
         get :index
         response.should render_template(:index)
       end
+
+      it "自分のストーリーが@storiesにアサインされる" do
+        get :index
+        assigns(:stories).should eq([mock_story])
+      end
     end
-    
+
     describe "ログインしてないけどOAuth認証している場合" do
       it "users/new にリダイレクト" do
         controller.stub(:login?) { false }
@@ -19,7 +29,7 @@ describe DashboardController do
         response.should redirect_to(new_user_path)
       end
     end
-    
+
     describe "ログインしてなくてOAuth認証もしていない場合" do
       it "root にリダイレクト" do
         controller.stub(:login?) { false }
