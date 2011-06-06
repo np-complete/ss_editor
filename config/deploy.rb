@@ -16,7 +16,7 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 end
 
@@ -26,7 +26,7 @@ namespace :bundler do
     release_dir = File.join(current_release, '.bundle')
     run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
   end
-  
+
   task :bundle_new_release, :roles => :app do
     bundler.create_symlink
     run "cd #{release_path} && bundle install --without test"
