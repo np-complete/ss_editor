@@ -6,3 +6,10 @@
     <li><%= link_to story.title, story %></li>
   <% end %>
 </ul>
+
+<h2>YOUR CHARACTERS</h2>
+<ul>
+  <% @faces.each do |face| %>
+    <li><%= link_to face.character.name, [face.character, face] %>
+  <% end %>
+</ul>
