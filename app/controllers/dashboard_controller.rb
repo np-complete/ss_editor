@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
   def index
     if login?
       @stories = @auth.stories
+      @faces = @auth.faces
     elsif identify?
       redirect_to [:new, :user]
     else
