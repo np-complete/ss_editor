@@ -78,7 +78,7 @@ class StoriesController < ApplicationController
     @story.destroy
 
     respond_to do |format|
-      format.html { redirect_to(stories_url) }
+      format.html { redirect_to(:dashboard) }
       format.xml  { head :ok }
     end
   end

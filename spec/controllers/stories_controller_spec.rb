@@ -114,7 +114,7 @@ describe StoriesController do
     it "redirects to the stories list" do
       Story.stub(:find) { mock_story }
       delete :destroy, :id => "1"
-      response.should redirect_to(stories_url)
+      response.should redirect_to(dashboard_url)
     end
   end
 
