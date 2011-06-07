@@ -75,3 +75,9 @@ header > h1 > a:hover {
     display: -ms-box;
     display: -o-box;
 }
+
+.boxed_form {
+    border: 10px solid #f0c0d0;
+    padding: 20px;
+}
+

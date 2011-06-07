@@ -1,6 +1,7 @@
 <h1>Editing dialog</h1>
 
-<%= render 'form' %>
+<div class="boxed_form">
+  <%= render 'form' %>
 
-<%= link_to 'Show', [@story, @dialog] %> |
-<%= link_to 'Back', [@story, :dialogs] %>
+  <%= link_to 'Back', [@story, :dialogs] %>
+</div>
