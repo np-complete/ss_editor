@@ -79,5 +79,12 @@ header > h1 > a:hover {
 .boxed_form {
     border: 10px solid #f0c0d0;
     padding: 20px;
+    margin: 25px 0;
+}
+
+.boxed_form h1 {
+    color: #ffcccc;
+    margin-top: -10px;
+    margin-left: -15px;
 }
 
