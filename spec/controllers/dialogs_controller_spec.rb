@@ -5,7 +5,7 @@ describe DialogsController do
   before do
     Story.stub(:find) { mock_story }
   end
-  
+
   describe "GET index" do
     it "assigns all dialogs as @dialogs" do
       mock_story.stub(:dialogs) { [mock_dialog] }
@@ -13,7 +13,7 @@ describe DialogsController do
       assigns(:dialogs).should eq([mock_dialog])
     end
   end
-  
+
   describe "PUT update_orders" do
     it "@story should recieve update_dialog_orders!" do
       mock_story.should_receive(:update_dialog_orders!).with([1,2,3,4]) { true }
@@ -26,7 +26,7 @@ describe DialogsController do
         response.body.should eq("ok")
       end
     end
-    
+
     describe "failure" do
       it "render 'ng'" do
         mock_story.stub(:update_dialog_orders!) { false }
@@ -71,7 +71,7 @@ describe DialogsController do
       it "redirects to the created dialog" do
         mock_story.stub_chain(:dialogs, :new) { mock_dialog(:save => true) }
         post :create, :dialog => {}, :story_id => "2"
-        response.should redirect_to(story_dialog_url(mock_story, mock_dialog))
+        response.should redirect_to(story_dialogs_url(mock_story))
       end
     end
 
@@ -139,7 +139,7 @@ describe DialogsController do
       response.should redirect_to(story_dialogs_url(mock_story))
     end
   end
-  
+
   describe "GET change_faces" do
     describe "character_id が指定された場合" do
       it "character_idの顔一覧が@facesにアサインされる" do
@@ -150,7 +150,7 @@ describe DialogsController do
         assigns[:faces].should eq([mock_face])
       end
     end
-    
+
     describe "character_id が指定されてない場合" do
       it "空の配列が@facesにアサインされる" do
         xhr :get, :change_faces, :story_id => "2", :character_id => ""
