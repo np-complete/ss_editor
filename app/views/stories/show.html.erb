@@ -5,6 +5,6 @@
   <% if @auth.id == @story.user_id %>
     <%= link_to 'Dialogs', [@story, :dialogs] %> |
     <%= link_to 'Edit', edit_story_path(@story) %> |
-    <%= link_to 'Back', stories_path %>
+    <%= link_to 'Back', :dashboard %>
   <% end %>
 </article>
