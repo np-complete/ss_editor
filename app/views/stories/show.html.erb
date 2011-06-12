@@ -2,9 +2,13 @@
 
 <article>
   <h1><%= @story.title %></h1>
-  <% if @auth.id == @story.user_id %>
-    <%= link_to 'Dialogs', [@story, :dialogs] %> |
-    <%= link_to 'Edit', edit_story_path(@story) %> |
-    <%= link_to 'Back', :dashboard %>
-  <% end %>
+
+  <div class="dialogs">
+    <% @story.dialogs(:include => [:face]).each do |dialog| %>
+      <div class="dialog horizontal">
+        <%= image_tag dialog.face.url %>
+        <div class="message"><%= dialog.message %></div>
+      </div>
+    <% end %>
+  </div>
 </article>
