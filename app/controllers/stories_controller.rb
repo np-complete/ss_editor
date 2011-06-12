@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.xml
   def index
-    @stories = Story.all(:include => :user)
+    @stories = Story.where(:published => true).all(:include => [:user])
 
     respond_to do |format|
       format.html # index.html.erb

@@ -7,7 +7,9 @@ describe StoriesController do
 
   describe "GET index" do
     it "assigns all stories as @stories" do
-      Story.stub(:all, :include => [:user]) { [mock_story] }
+      @obj = Object.new
+      Story.stub(:where).with(:published => true) { @obj }
+      @obj.stub(:all).with(:include => [:user]) { [mock_story] }
       get :index
       assigns(:stories).should eq([mock_story])
     end
