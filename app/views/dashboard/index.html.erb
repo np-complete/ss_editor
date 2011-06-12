@@ -9,6 +9,7 @@
       </td>
       <td>
         <%= link_to 'Show', story %>
+        <%= link_to 'Dialogs', [story, :dialogs] %>
         <%= link_to 'Edit', [:edit, story] %>
         <%= link_to 'Delete', story, :method => :delete, :confirm => "本当に消すよ?" %>
       </td>
