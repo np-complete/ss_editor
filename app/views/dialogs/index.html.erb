@@ -1,13 +1,11 @@
 <h1>Listing dialogs</h1>
 
-<div id="dialogs" class="dialogs">
+<div id="dialogs" class="admin_dialogs">
   <% @dialogs.each do |dialog| %>
     <div id="dialogs_<%= dialog.id %>" class="dialog">
       <%= image_tag dialog.face.icon.url(:thumb) %>
-      <%#= dialog.character.name %>
       <%= dialog.message %>
       <footer>
-        <%= link_to 'Show', [@story, dialog] %>
         <%= link_to 'Edit', [:edit, @story, dialog] %>
         <%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %>
       </footer>
@@ -19,5 +17,6 @@
 
 
 <br />
-
-<%= link_to 'New Dialog', [:new, @story, :dialog] %>
+<div class="boxed_form">
+  <%== render :partial => 'form' %>
+</div>

@@ -10,11 +10,17 @@ header {
     background-color: #dddddd;
 }
 
-header > h1 {
+h1#logo {
     margin: 0;
     padding: 0;
     line-height: 1;
+    float: left;
 }
+
+#status {
+    text-align: right;
+}
+
 header > h1 > a {
     text-decoration: none;
 }
@@ -28,14 +34,57 @@ header > h1 > a:hover {
     margin: 10px 30px;
 }
 
-
 .dialogs {
+    padding: 0px 20px;
+    width: 80%;
+}
+.dialogs .dialog {
+    border: 3px solid #eeeeee;
+    padding: 7px 7px 12px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.dialogs .dialog .message {
+    border-top: 12px;
+    font-size: 180%;
+    margin-left: 12px;
+    width: 90%;
+    line-height: 1.2;
+    text-align:top;
+}
+
+.admin_dialogs {
     border: 10px solid #f0f0f0;
 }
 
-.dialogs .dialog {
+.admin_dialogs .dialog {
     border :1px dotted #c0c0c0;
     border-left: 24px solid #c0c0f0;
     padding: 5px 10px;
     margin: 10px;
 }
+
+.horizontal {
+    -webkit-box-orient: horizontal;
+    -moz-box-orieng: horizontal;
+    -ms-box-orient:horizontal;
+    -o-box-orient:horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
+}
+
+.boxed_form {
+    border: 10px solid #f0c0d0;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.boxed_form h1 {
+    color: #ffcccc;
+    margin-top: -10px;
+    margin-left: -15px;
+}
+

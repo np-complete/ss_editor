@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.xml
   def index
-    @stories = Story.where(:published => true)
+    @stories = Story.where(:published => true).all(:include => [:user])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,7 +78,7 @@ class StoriesController < ApplicationController
     @story.destroy
 
     respond_to do |format|
-      format.html { redirect_to(stories_url) }
+      format.html { redirect_to(:dashboard) }
       format.xml  { head :ok }
     end
   end

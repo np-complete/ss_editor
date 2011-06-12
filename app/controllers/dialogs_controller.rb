@@ -5,13 +5,14 @@ class DialogsController < ApplicationController
   # GET /dialogs.xml
   def index
     @dialogs = @story.dialogs
+    @dialog = @story.dialogs.new
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @dialogs }
     end
   end
-  
+
   def update_orders
     Dialog.transaction do
       if @story.update_dialog_orders!(params[:dialogs].map(&:to_i))
@@ -58,7 +59,7 @@ class DialogsController < ApplicationController
 
     respond_to do |format|
       if @dialog.save
-        format.html { redirect_to([@story, @dialog], :notice => 'Dialog was successfully created.') }
+        format.html { redirect_to([@story, :dialogs], :notice => 'Dialog was successfully created.') }
         format.xml  { render :xml => @dialog, :status => :created, :location => @dialog }
       else
         format.html { render :action => "new" }
@@ -94,10 +95,10 @@ class DialogsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def change_faces
     @faces = params[:character_id].present? ?  @faces = Character.find(params[:character_id]).faces : []
-    
+
     render :update do |page|
       page.replace_html :dialog_face_id, options_for_select(@faces.map{|x| [x.name, x.id]})
     end

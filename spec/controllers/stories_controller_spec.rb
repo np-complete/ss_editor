@@ -7,7 +7,9 @@ describe StoriesController do
 
   describe "GET index" do
     it "assigns all stories as @stories" do
-      Story.stub(:where).with(:published => true) { [mock_story] }
+      @obj = Object.new
+      Story.stub(:where).with(:published => true) { @obj }
+      @obj.stub(:all).with(:include => [:user]) { [mock_story] }
       get :index
       assigns(:stories).should eq([mock_story])
     end
@@ -114,7 +116,7 @@ describe StoriesController do
     it "redirects to the stories list" do
       Story.stub(:find) { mock_story }
       delete :destroy, :id => "1"
-      response.should redirect_to(stories_url)
+      response.should redirect_to(dashboard_url)
     end
   end
 

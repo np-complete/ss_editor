@@ -1,6 +1,7 @@
 <h1>Editing story</h1>
+<div class="boxed_form">
+  <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @story %> |
-<%= link_to 'Back', stories_path %>
+  <%= link_to 'Show', @story %> |
+  <%= link_to 'Back', :dashboard %>
+</div>

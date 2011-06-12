@@ -1,8 +1,24 @@
 <h1>DASHBOARD</h1>
 
 <h2>YOUR STORIES</h2>
-<ul>
+<table>
   <% @stories.each do |story| %>
-    <li><%= link_to story.title, story %></li>
+    <tr>
+      <td>
+        <%= story.title %>
+      </td>
+      <td>
+        <%= link_to 'Show', story %>
+        <%= link_to 'Edit', [:edit, story] %>
+        <%= link_to 'Delete', story, :method => :delete, :confirm => "本当に消すよ?" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>YOUR CHARACTERS</h2>
+<ul>
+  <% @faces.each do |face| %>
+    <li><%= link_to face.character.name, [face.character, face] %>
   <% end %>
 </ul>
