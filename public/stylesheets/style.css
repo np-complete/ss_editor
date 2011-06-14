@@ -77,14 +77,43 @@ header > h1 > a:hover {
 }
 
 .boxed_form {
-    border: 10px solid #f0c0d0;
+    border: 3px solid #d0d0d0;
     padding: 20px;
     margin: 25px 0;
+    background-color: #fafafa;
 }
 
 .boxed_form h1 {
-    color: #ffcccc;
-    margin-top: -10px;
-    margin-left: -15px;
+    color: #606060;
+    margin-top: -8px;
+    margin-left: -12px;
 }
 
+select {
+    min-width: 30%;
+}
+
+input, textarea, select {
+    font-size: x-large;
+}
+
+input[type="text"], textarea {
+    padding: 8px 10px;
+    width: 80%;
+}
+
+select, input[type="submit"], button {
+    padding: 6px 12px;
+}
+
+input[type="submit"], button {
+    font-size: large;
+    border: 2px solid #d0d0d0;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #4a4aa0;
+    color: #ffffff;
+}
