@@ -7,6 +7,7 @@ describe "dialogs/index.html.erb" do
         stub_model(Dialog, :character => stub_model(Character), :face => stub_model(Face)),
         stub_model(Dialog, :character => stub_model(Character), :face => stub_model(Face))
     ])
+    assign(:dialog, stub_model(Dialog))
   end
 
   it "renders a list of dialogs" do
