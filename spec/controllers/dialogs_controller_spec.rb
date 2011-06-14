@@ -8,9 +8,12 @@ describe DialogsController do
 
   describe "GET index" do
     it "assigns all dialogs as @dialogs" do
-      mock_story.stub(:dialogs) { [mock_dialog] }
+      mock_array = mock(Array, :new => mock_dialog)
+      mock_story.stub(:dialogs) { mock_array }
+
       get :index, :story_id => "2"
-      assigns(:dialogs).should eq([mock_dialog])
+      assigns(:dialogs).should eq(mock_array)
+      assigns(:dialog).should eq(mock_dialog)
     end
   end
 
