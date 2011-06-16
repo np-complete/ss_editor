@@ -51,7 +51,7 @@ describe StoriesController do
       it "redirects to the created story" do
         Story.stub(:new) { mock_story(:save => true, :user_id= => true) }
         post :create, :story => {}
-        response.should redirect_to(story_url(mock_story))
+        response.should redirect_to(story_dialogs_url(mock_story))
       end
     end
 
