@@ -21,6 +21,6 @@
 <h2>YOUR CHARACTERS</h2>
 <ul>
   <% @faces.each do |face| %>
-    <li><%= link_to face.character.name, [face.character, face] %>
+    <li><%= face.character.name %>: <%= link_to face.name, [face.character, face] %>
   <% end %>
 </ul>
