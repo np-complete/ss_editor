@@ -1,5 +1,6 @@
 class DialogsController < ApplicationController
   parent_resources :story
+  before_filter :check_my_story
 
   # GET /dialogs
   # GET /dialogs.xml
@@ -102,5 +103,10 @@ class DialogsController < ApplicationController
     render :update do |page|
       page.replace_html :dialog_face_id, options_for_select(@faces.map{|x| [x.name, x.id]})
     end
+  end
+
+  private
+  def check_my_story
+    access_controll(lambda{ @auth.id == @story.user_id })
   end
 end
