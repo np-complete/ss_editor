@@ -24,13 +24,14 @@ div.field, div.actions {
   color: green;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+.field_with_errors input,
+.field_with_errors select,
+.field_with_errors radio,
+.field_with_errors checkbox {
+    border: #c00 3px solid;
 }
 
-#error_explanation {
+#errorExplanation {
   width: 450px;
   border: 2px solid red;
   padding: 7px;
@@ -39,7 +40,7 @@ div.field, div.actions {
   background-color: #f0f0f0;
 }
 
-#error_explanation h2 {
+#errorExplanation h2 {
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
@@ -50,7 +51,7 @@ div.field, div.actions {
   color: #fff;
 }
 
-#error_explanation ul li {
+#errorExplanation ul li {
   font-size: 12px;
   list-style: square;
 }
