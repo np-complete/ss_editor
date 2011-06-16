@@ -1,21 +1,22 @@
-<h1>Listing dialogs</h1>
+<h1><%= @story.title %> Listing dialogs</h1>
 
-<div id="dialogs" class="admin_dialogs">
-  <% @dialogs.each do |dialog| %>
-    <div id="dialogs_<%= dialog.id %>" class="dialog">
-      <%= image_tag dialog.face.icon.url(:thumb) %>
-      <%= dialog.message %>
-      <footer>
-        <%= link_to 'Edit', [:edit, @story, dialog] %>
-        <%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %>
-      </footer>
-    </div>
-  <% end %>
-</div>
+<% if @dialogs.length > 0 %>
+  <div id="dialogs" class="admin_dialogs">
+    <% @dialogs.each do |dialog| %>
+      <div id="dialogs_<%= dialog.id %>" class="dialog">
+        <%= image_tag dialog.face.icon.url(:thumb) %>
+        <%= dialog.message %>
+        <footer>
+          <%= link_to 'Edit', [:edit, @story, dialog] %>
+          <%= link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete %>
+        </footer>
+      </div>
+    <% end %>
+  </div>
 
-<%= sortable_element :dialogs, :tag => :div, :url => [:update_orders, @story, :dialogs], :method => :put %>
+  <%= sortable_element :dialogs, :tag => :div, :url => [:update_orders, @story, :dialogs], :method => :put %>
+<% end %>
 
-<br />
 <div class="boxed_form">
   <%== render :partial => 'form' %>
 </div>
