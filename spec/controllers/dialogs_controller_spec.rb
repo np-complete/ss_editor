@@ -4,6 +4,7 @@ require 'spec_helper'
 describe DialogsController do
   before do
     Story.stub(:find) { mock_story }
+    controller.stub(:check_my_story) { true }
   end
 
   describe "GET index" do
