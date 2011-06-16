@@ -46,7 +46,7 @@ class StoriesController < ApplicationController
     @story.user_id = @auth.id
     respond_to do |format|
       if @story.save
-        format.html { redirect_to(@story, :notice => 'Story was successfully created.') }
+        format.html { redirect_to([@story, :dialogs], :notice => 'Story was successfully created.') }
         format.xml  { render :xml => @story, :status => :created, :location => @story }
       else
         format.html { render :action => "new" }
