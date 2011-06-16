@@ -75,7 +75,7 @@ class DialogsController < ApplicationController
 
     respond_to do |format|
       if @dialog.update_attributes(params[:dialog])
-        format.html { redirect_to([@story, @dialog], :notice => 'Dialog was successfully updated.') }
+        format.html { redirect_to([@story, :dialogs], :notice => 'Dialog was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
