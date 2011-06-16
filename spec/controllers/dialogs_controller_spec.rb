@@ -71,7 +71,7 @@ describe DialogsController do
         assigns(:dialog).should be(mock_dialog)
       end
 
-      it "redirects to the created dialog" do
+      it "redirects to dialogs list" do
         mock_story.stub_chain(:dialogs, :new) { mock_dialog(:save => true) }
         post :create, :dialog => {}, :story_id => "2"
         response.should redirect_to(story_dialogs_url(mock_story))
@@ -107,10 +107,10 @@ describe DialogsController do
         assigns(:dialog).should be(mock_dialog)
       end
 
-      it "redirects to the dialog" do
+      it "redirects to the dialogs list" do
         mock_story.stub_chain(:dialogs, :find) { mock_dialog(:update_attributes => true) }
         put :update, :id => "1", :story_id => "2"
-        response.should redirect_to(story_dialog_url(mock_story, mock_dialog))
+        response.should redirect_to(story_dialogs_url(mock_story))
       end
     end
 
