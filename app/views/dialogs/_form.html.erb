@@ -9,8 +9,7 @@
     <%= f.select :face_id, (@dialog.character.try(:faces) || []).map{|x| [x.name, x.id]} %>
   </div>
   <div class="field">
-    <%= f.label :message, "セリフ" %><br />
-    <%= f.text_field :message %>
+    <%= f.text_field :message, :placeholder => "セリフ"  %>
   </div>
   <div class="actions">
     <%= f.submit %>
