@@ -33,7 +33,7 @@ describe StoriesController do
 
   describe "GET edit" do
     it "assigns the requested story as @story" do
-      Story.stub(:find).with("37") { mock_story }
+      mock_user.stub_chain(:stories, :find).with("37") { mock_story }
       get :edit, :id => "37"
       assigns(:story).should be(mock_story)
     end
@@ -73,19 +73,19 @@ describe StoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested story" do
-        Story.stub(:find).with("37") { mock_story }
+        mock_user.stub_chain(:stories, :find).with("37") { mock_story }
         mock_story.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :story => {'these' => 'params'}
       end
 
       it "assigns the requested story as @story" do
-        Story.stub(:find) { mock_story(:update_attributes => true) }
+        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => true) }
         put :update, :id => "1"
         assigns(:story).should be(mock_story)
       end
 
       it "redirects to the story" do
-        Story.stub(:find) { mock_story(:update_attributes => true) }
+        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => true) }
         put :update, :id => "1"
         response.should redirect_to(story_url(mock_story))
       end
@@ -93,13 +93,13 @@ describe StoriesController do
 
     describe "with invalid params" do
       it "assigns the story as @story" do
-        Story.stub(:find) { mock_story(:update_attributes => false) }
+        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => false) }
         put :update, :id => "1"
         assigns(:story).should be(mock_story)
       end
 
       it "re-renders the 'edit' template" do
-        Story.stub(:find) { mock_story(:update_attributes => false) }
+        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => false) }
         put :update, :id => "1"
         response.should render_template("edit")
       end
@@ -108,13 +108,13 @@ describe StoriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested story" do
-      Story.stub(:find).with("37") { mock_story }
+      mock_user.stub_chain(:stories, :find).with("37") { mock_story }
       mock_story.should_receive(:destroy)
       delete :destroy, :id => "37"
     end
 
     it "redirects to the stories list" do
-      Story.stub(:find) { mock_story }
+      mock_user.stub_chain(:stories, :find) { mock_story }
       delete :destroy, :id => "1"
       response.should redirect_to(dashboard_url)
     end
