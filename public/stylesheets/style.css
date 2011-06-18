@@ -45,7 +45,7 @@ header > h1 > a:hover {
     border-radius: 8px;
 }
 
-.dialogs .dialog .message {
+.dialog .message {
     border-top: 12px;
     font-size: 180%;
     margin-left: 12px;
