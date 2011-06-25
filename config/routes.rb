@@ -1,7 +1,7 @@
 SsEditor::Application.routes.draw do
   resources :users
 
-  resources :characters do
+  resources :characters, :except => [:edit, :update, :destroy] do
     resources :faces
   end
 
@@ -13,7 +13,7 @@ SsEditor::Application.routes.draw do
       end
     end
   end
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -65,7 +65,7 @@ SsEditor::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
   root :to => 'stories#index'
-  
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
