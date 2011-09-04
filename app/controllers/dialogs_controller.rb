@@ -6,7 +6,7 @@ class DialogsController < ApplicationController
   # GET /dialogs.xml
   def index
     @dialogs = @story.dialogs
-    @dialog = @story.dialogs.new
+    @dialog = Dialog.new(:story => @story)
 
     respond_to do |format|
       format.html # index.html.erb
