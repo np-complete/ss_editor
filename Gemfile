@@ -1,7 +1,7 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails'
 
 gem 'parent_resource'
 gem 'rack-openid'
@@ -17,12 +17,16 @@ group :test, :development do
   gem "rspec-rails"
   gem "auto_mock"
   gem "webrat"
-  gem "autotest"
-  gem "cover_me"
+  gem "guard"
+  gem "guard-rspec"
+  gem "guard-spork"
+  gem "guard-bundler"
+  gem "pry"
+  gem "factory_girl_rails"
 end
 
 group :production do
-  gem 'mysql2', '< 0.4.0'
+  gem 'mysql2'
 end
 
 group :development do
