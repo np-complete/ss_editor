@@ -1,0 +1,14 @@
+= form_for([@story, @dialog]) do |f|
+  = f.error_messages
+  .field
+    = f.label :character_id, "キャラクター"
+    %br
+    = f.select :character_id, Character.all.map{|x| [x.name, x.id]}, {:include_blank => true}, :onchange => remote_function(:url => url_for([:change_faces, @story, :dialogs]), :with => "'character_id=' + this.value", :method => :get)
+  .field
+    = f.label :face_id, "顔アイコン"
+    %br
+    = f.select :face_id, (@dialog.character.try(:faces) || []).map{|x| [x.name, x.id]}
+  .field
+    = f.text_area :message, :placeholder => "セリフ", :rows => 4
+  .actions
+    = f.submit

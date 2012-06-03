@@ -1,0 +1,16 @@
+require 'spec_helper'
+
+describe "dialogs/index.html.haml" do
+  before(:each) do
+    assign(:story, stub_model(Story))
+    assign(:dialogs, [
+        stub_model(Dialog, :character => stub_model(Character), :face => stub_model(Face)),
+        stub_model(Dialog, :character => stub_model(Character), :face => stub_model(Face))
+    ])
+    assign(:dialog, stub_model(Dialog))
+  end
+
+  it "renders a list of dialogs" do
+    render
+  end
+end

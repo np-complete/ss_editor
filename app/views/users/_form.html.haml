@@ -1,0 +1,7 @@
+= form_for(@user) do |f|
+  = f.error_messages
+  .field
+    = f.text_field :name, :placeholder => "Name"
+  .actions
+    = f.submit
+

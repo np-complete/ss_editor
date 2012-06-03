@@ -1,0 +1,10 @@
+%p#notice= notice
+
+%article
+  %h1= @story.title
+
+  .dialogs
+    - @story.dialogs(:include => [:face]).each do |dialog|
+      .dialog.horizontal
+        = image_tag dialog.face.url
+        .message= simple_format dialog.message

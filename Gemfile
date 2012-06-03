@@ -11,6 +11,14 @@ gem 'gravatar_image_tag'
 gem 'paperclip'
 gem 'prototype-rails'
 gem 'unicorn'
+gem 'haml'
+gem 'haml-rails'
+
+group :assets do
+  gem 'coffee-rails'
+  gem 'sass-rails'
+  gem 'uglifier'
+end
 
 group :test, :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'

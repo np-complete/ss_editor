@@ -1,0 +1,20 @@
+%h1
+  = @story.title
+  Listing dialogs
+
+- if @dialogs.length > 0
+  #dialogs.admin_dialogs
+    - @dialogs.each do |dialog|
+      %div.dialog{:id => "dialogs_#{dialog.id}"}
+        .horizontal
+          = image_tag dialog.face.icon.url(:thumb)
+          .message= simple_format dialog.message
+        %footer
+          = link_to 'Edit', [:edit, @story, dialog]
+          = link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete
+  = sortable_element :dialogs, :tag => :div, :url => [:update_orders, @story, :dialogs], :method => :put
+
+.boxed_form
+  %h1 New dialog
+  = render :partial => 'form'
+

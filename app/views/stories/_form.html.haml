@@ -1,0 +1,9 @@
+= form_for(@story) do |f|
+  = f.error_messages
+  .field
+    = f.text_field :title, :placefolder => "Title"
+  .field
+    = f.check_box :published
+    = f.label :published, "公開する"
+  .actions
+    = f.submit

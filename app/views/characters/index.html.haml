@@ -1,0 +1,17 @@
+%h1 Listing characters
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @characters.each do |character|
+    %tr
+      %td= character.name
+      %td= link_to 'Show', character
+
+%br
+
+= link_to 'New Character', [:new, :character]

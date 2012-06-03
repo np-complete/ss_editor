@@ -1,0 +1,21 @@
+%h1 DASHBOARD
+
+%h2 YOUR STORIES
+%table
+  - @stories.each do |story|
+    %tr
+      %td
+        = story.title
+      %td
+        = link_to 'Show', story
+        = link_to 'Dialogs', [story, :dialogs]
+        = link_to 'Edit', [:edit, story]
+        = link_to 'Delete', story, :method => :delete, :confirm => "本当に消すよ?"
+= link_to "new", [:new, :story]
+
+%h2 YOUR CHARACTERS
+%ul
+  - @faces.each do |face|
+    %li
+      = face.character.name
+      = link_to face.name, [face.character, face]

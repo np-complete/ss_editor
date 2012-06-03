@@ -1,0 +1,17 @@
+%h1 Listing faces
+
+%table
+  %tr
+    %th アイコン名
+    %th アイコン
+    %th
+    %th
+    %th
+  - @faces.each do |face|
+    %tr
+      %td= face.name
+      %td= image_tag face.url
+      %td= link_to 'Show', [@character, face]
+      %td= link_to 'Edit', [:edit, @character, face]
+      %td= link_to 'Destroy', [@character, face], :confirm => 'Are you sure?', :method => :delete
+= link_to 'New Face', [:new, @character, :face]

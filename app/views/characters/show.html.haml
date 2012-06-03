@@ -1,0 +1,7 @@
+%p#notice= notice
+%article
+  %h1= @character.name
+  = link_to 'Faces', [@character, :faces]
+  |
+  = link_to 'Back', characters_path
+

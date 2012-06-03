@@ -1,0 +1,12 @@
+= form_for([@character, @face], :html => {:multipart => true}) do |f|
+  = f.error_messages
+  .field
+    = f.label :name, "アイコン名"
+    %br
+    = f.text_field :name
+  .field
+    = f.label :icon, "ファイル"
+    %br
+    = f.file_field :icon
+  .actions
+    = f.submit

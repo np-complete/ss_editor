@@ -1,0 +1,7 @@
+- @stories.each do |story|
+  %article
+    %h1= link_to story.title, story
+    %footer
+      written by
+      = story.user.name
+

@@ -7,7 +7,7 @@ class StoriesController < ApplicationController
     @stories = Story.where(:published => true).all(:include => [:user])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @stories }
     end
   end
@@ -18,7 +18,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @story }
     end
   end
@@ -29,7 +29,7 @@ class StoriesController < ApplicationController
     @story = Story.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
       format.xml  { render :xml => @story }
     end
   end
