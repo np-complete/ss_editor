@@ -1,3 +1,4 @@
+
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
@@ -9,6 +10,7 @@ gem 'dynamic_form'
 gem 'gravatar_image_tag'
 gem 'paperclip'
 gem 'prototype-rails'
+gem 'unicorn'
 
 group :test, :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
@@ -26,4 +28,5 @@ end
 group :development do
   gem 'capistrano'
   gem 'capistrano_colors'
+  gem 'capistrano-unicorn'
 end

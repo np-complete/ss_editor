@@ -1,24 +1,17 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-require 'rvm/capistrano'
-set :rvm_ruby_string, 'ruby-1.9.2@ss_editor'
 set :rvm_type, :user
+$:.unshift(File.expand_path('.lib', ENV['rvm_path']))
+require 'rvm/capistrano'
 
 set :application, "ss_editor"
 set :repository, "git://github.com/np-complete/ss_editor.git"
-set :deploy_to, "/usr/local/www/#{application}"
+set :deploy_to, "/home/masaki/www/#{application}"
 
 set :scm, :git
 role :web, "hisme.net"
 role :app, "hisme.net"
 role :db,  "hisme.net", :primary => true
 
-namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-end
+require 'capistrano-unicorn'
 
 namespace :bundler do
   task :create_symlink, :roles => :app do

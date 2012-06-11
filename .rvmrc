@@ -1,6 +1,1 @@
-ruby="ruby-1.9.2-p290@ss_editor"
-if [[ -s $HOME/.rvm/environments/$ruby ]]; then
-   . "$HOME/.rvm/environments/$ruby"
-else
-  rvm --create use $ruby
-fi
+rvm use --create @ss_editor
