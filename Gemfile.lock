@@ -137,6 +137,8 @@ GEM
     ruby-openid (2.1.8)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
+    rvm-capistrano (1.2.2)
+      capistrano (>= 2.0.0)
     sprockets (2.0.4)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -180,6 +182,7 @@ DEPENDENCIES
   rails (= 3.1.0)
   rspec-rails
   ruby-openid-apps-discovery
+  rvm-capistrano
   sqlite3-ruby
   unicorn
   webrat
