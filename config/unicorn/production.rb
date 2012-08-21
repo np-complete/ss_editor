@@ -5,6 +5,7 @@ stderr_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
 stdout_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
 
 preload_app true
+pid File.expand_path('tmp/pids/unicorn.pid', ENV['RAILS_ROOT'])
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
