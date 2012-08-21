@@ -2,24 +2,20 @@
 require 'spec_helper'
 
 describe Character do
-  fixtures :characters
-  before do
-    @valid_attributes = {
-      :name => '平沢唯'
-    }
-  end
-  
-  describe "#valid?" do
-    subject { Character.new(@valid_attributes) }
+  describe :attributes do
+    subject { FactoryGirl.build(:character) }
     it { should be_valid }
     its(:save) { should be_true }
-    it "nameは必須" do
-      subject.name = nil
-      subject.should_not be_valid
-    end
-    it "nameはユニーク" do
-      subject.name = '秋山澪'
-      subject.should_not be_valid
+
+    describe :name do
+      context :nil do
+        before { subject.name = nil }
+        it { should_not be_valid }
+      end
+      context :not_unique do
+        before { Character.create(subject.attributes) }
+        it { should_not be_valid }
+      end
     end
   end
 end

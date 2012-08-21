@@ -2,15 +2,14 @@ require 'spec_helper'
 
 describe "Dialogs" do
   describe "GET /dialogs" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:story) { FactoryGirl.create(:story, user: user) }
     before do
-      @mock_auth = stub_model(User)
-      @mock_story = stub_model(Story, :user_id => @mock_auth.id)
-      User.stub(:find) { @mock_auth }
-      Story.stub(:find) { @mock_story }
+      User.stub(:find).and_return(user)
+      Story.stub(:find).and_return(story)
     end
     it "works! (now write some real specs)" do
-      @mock_story.stub(:dialogs) { [stub_model(Dialog)] }
-      #get story_dialogs_path(@mock_story)
+      #get story_dialogs_path(story)
       #response.status.should be(200)
     end
   end
