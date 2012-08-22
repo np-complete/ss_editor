@@ -2,48 +2,33 @@
 require 'spec_helper'
 
 describe DashboardController do
+  let(:user) { FactoryGirl.create(:user) }
   describe "GET index" do
-    describe "ログインしている場合" do
-      before do
-        controller.stub(:login?) { true }
-        controller.instance_variable_set(:@auth,
-          mock_user(:stories => [mock_story]))
-      end
+    context "ログインしている場合" do
+      let(:stories) { FactoryGirl.create_list(:story, 5, user: user) }
+      before { sign_in user }
 
       it "render index" do
         get :index
         response.should render_template(:index)
       end
 
-      it "自分のストーリーが@storiesにアサインされる" do
-        get :index
-        assigns(:stories).should eq([mock_story])
-      end
     end
 
-    describe "ログインしてないけどOAuth認証している場合" do
-      it "users/new にリダイレクト" do
-        controller.stub(:login?) { false }
-        controller.stub(:identify?) { true }
-        get :index
-        response.should redirect_to(new_user_path)
-      end
-    end
-
-    describe "ログインしてなくてOAuth認証もしていない場合" do
+    context "ログインしていない場合" do
       it "root にリダイレクト" do
-        controller.stub(:login?) { false }
-        controller.stub(:identify?) { false }
         get :index
         response.should redirect_to(root_path)
       end
     end
   end
+
   describe "GET logout" do
-    it "セッションが破棄される" do
-      controller.session[:identity_url] = "sample@example.com"
-      get :logout
-      controller.session[:identity_url].should be_nil
+    before { sign_in user }
+    it "ログアウトする" do
+      lambda {
+        get :logout
+      }.should change(controller, :user_signed_in?).from(true).to(false)
     end
   end
 end

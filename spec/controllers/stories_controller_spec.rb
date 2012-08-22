@@ -1,69 +1,66 @@
 require 'spec_helper'
 
 describe StoriesController do
-  before do
-    controller.instance_variable_set(:@auth, mock_user(:id => 27))
-  end
+  let(:user) { FactoryGirl.create(:user) }
+  let(:story) { FactoryGirl.create(:story, user: user) }
+  before { sign_in user }
 
   describe "GET index" do
     it "assigns all stories as @stories" do
       @obj = Object.new
       Story.stub(:where).with(:published => true) { @obj }
-      @obj.stub(:all).with(:include => [:user]) { [mock_story] }
+      @obj.stub(:all).with(:include => [:user]).and_return(:stories)
       get :index
-      assigns(:stories).should eq([mock_story])
+      assigns(:stories).should == :stories
     end
   end
 
   describe "GET show" do
     it "assigns the requested story as @story" do
-      Story.stub(:find).with("37") { mock_story }
-      get :show, :id => "37"
-      assigns(:story).should be(mock_story)
+      get :show, :id => story.id
+      assigns(:story).should == story
     end
   end
 
   describe "GET new" do
     it "assigns a new story as @story" do
-      Story.stub(:new) { mock_story }
       get :new
-      assigns(:story).should be(mock_story)
+      assigns(:story).should be_new_record
     end
   end
 
   describe "GET edit" do
     it "assigns the requested story as @story" do
-      mock_user.stub_chain(:stories, :find).with("37") { mock_story }
-      get :edit, :id => "37"
-      assigns(:story).should be(mock_story)
+      get :edit, :id => story.id
+      assigns(:story).should == story
     end
   end
 
   describe "POST create" do
+    let!(:new_story) { FactoryGirl.build(:story) }
+    before { Story.stub(:new).and_return(new_story) }
     describe "with valid params" do
       it "assigns a newly created story as @story" do
-        Story.stub(:new).with({'these' => 'params'}) { mock_story(:save => true) }
-        mock_story.should_recieve(:user_id=).with(27)
+        Story.should_receive(:new).with({'these' => 'params'}).and_return(new_story)
+        new_story.should_receive(:user=).with(user)
         post :create, :story => {'these' => 'params'}
-        assigns(:story).should be(mock_story)
+        assigns(:story).should == new_story
       end
 
       it "redirects to the created story" do
-        Story.stub(:new) { mock_story(:save => true, :user_id= => true) }
         post :create, :story => {}
-        response.should redirect_to(story_dialogs_url(mock_story))
+        response.should redirect_to([new_story, :dialogs])
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved story as @story" do
-        Story.stub(:new).with({'these' => 'params'}) { mock_story(:save => false, :user_id= => true) }
-        post :create, :story => {'these' => 'params'}
-        assigns(:story).should be(mock_story)
+      before { Story.any_instance.stub(:save).and_return(false) }
+      it "not saved" do
+        post :create, :story => {}
+        assigns(:story).should be_new_record
       end
 
       it "re-renders the 'new' template" do
-        Story.stub(:new) { mock_story(:save => false, :user_id= => true) }
         post :create, :story => {}
         response.should render_template("new")
       end
@@ -72,50 +69,43 @@ describe StoriesController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before { Story.any_instance.stub(:update_attributes).and_return(true) }
       it "updates the requested story" do
-        mock_user.stub_chain(:stories, :find).with("37") { mock_story }
-        mock_story.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :story => {'these' => 'params'}
-      end
-
-      it "assigns the requested story as @story" do
-        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => true) }
-        put :update, :id => "1"
-        assigns(:story).should be(mock_story)
+        Story.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => story.id, :story => {'these' => 'params'}
+        assigns(:story).should == story
       end
 
       it "redirects to the story" do
-        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(story_url(mock_story))
+        put :update, :id => story.id
+        response.should redirect_to([story])
       end
     end
 
     describe "with invalid params" do
+      before { Story.any_instance.stub(:update_attributes).and_return(false) }
       it "assigns the story as @story" do
-        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => false) }
-        put :update, :id => "1"
-        assigns(:story).should be(mock_story)
+        put :update, :id => story.id
+        assigns(:story).should == story
       end
 
       it "re-renders the 'edit' template" do
-        mock_user.stub_chain(:stories, :find) { mock_story(:update_attributes => false) }
-        put :update, :id => "1"
+        put :update, :id => story.id
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
+    before { Story.any_instance.stub(:destroy).and_return(true) }
     it "destroys the requested story" do
-      mock_user.stub_chain(:stories, :find).with("37") { mock_story }
-      mock_story.should_receive(:destroy)
-      delete :destroy, :id => "37"
+      Story.any_instance.should_receive(:destroy)
+      delete :destroy, :id => story.id
+      assigns(:story).should == story
     end
 
     it "redirects to the stories list" do
-      mock_user.stub_chain(:stories, :find) { mock_story }
-      delete :destroy, :id => "1"
+      delete :destroy, :id => story.id
       response.should redirect_to(dashboard_url)
     end
   end

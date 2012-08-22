@@ -7,16 +7,16 @@
 %header
   %h1#logo= link_to 'SS Editor', :root
   #status
-    - if login?
-      %strong= @auth.name
+    - if user_signed_in?
+      %strong= current_user.name
       |
       = link_to 'ダッシュボード', :dashboard
       |
       = link_to 'ログアウト', :logout
-    - else
+      - else
       %strong ログインしていません
       |
-      = link_to 'ログイン', :login
+      = link_to 'ログイン', user_omniauth_authorize_path(:google)
   %nav
     %ul
       %li= link_to 'stories', :stories

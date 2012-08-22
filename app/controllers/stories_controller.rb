@@ -36,14 +36,14 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
-    @story = @auth.stories.find(params[:id])
+    @story = current_user.stories.find(params[:id])
   end
 
   # POST /stories
   # POST /stories.xml
   def create
     @story = Story.new(params[:story])
-    @story.user_id = @auth.id
+    @story.user = current_user
     respond_to do |format|
       if @story.save
         format.html { redirect_to([@story, :dialogs], :notice => 'Story was successfully created.') }
@@ -58,8 +58,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.xml
   def update
-    @story = @auth.stories.find(params[:id])
-
+    @story = current_user.stories.find(params[:id])
     respond_to do |format|
       if @story.update_attributes(params[:story])
         format.html { redirect_to(@story, :notice => 'Story was successfully updated.') }
@@ -74,7 +73,7 @@ class StoriesController < ApplicationController
   # DELETE /stories/1
   # DELETE /stories/1.xml
   def destroy
-    @story = @auth.stories.find(params[:id])
+    @story = current_user.stories.find(params[:id])
     @story.destroy
 
     respond_to do |format|

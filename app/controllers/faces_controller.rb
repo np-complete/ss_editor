@@ -1,6 +1,6 @@
 class FacesController < ApplicationController
   parent_resource :character
-  before_filter :only_login
+  before_filter :authenticate_user!
 
   # GET /faces
   # GET /faces.xml
@@ -43,8 +43,10 @@ class FacesController < ApplicationController
   # POST /faces
   # POST /faces.xml
   def create
-    @face = @character.faces.new(params[:face])
-    @face.user_id = @auth.id
+    @face = Face.new(params[:face])
+    @face.character = @character
+    @face.user = current_user
+
     respond_to do |format|
       if @face.save
         format.html { redirect_to([@character, @face], :notice => 'Face was successfully created.') }
@@ -60,7 +62,6 @@ class FacesController < ApplicationController
   # PUT /faces/1.xml
   def update
     @face = @character.faces.find(params[:id])
-
     respond_to do |format|
       if @face.update_attributes(params[:face])
         format.html { redirect_to([@character, @face], :notice => 'Face was successfully updated.') }

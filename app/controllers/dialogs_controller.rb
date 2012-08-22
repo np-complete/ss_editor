@@ -56,7 +56,9 @@ class DialogsController < ApplicationController
   # POST /dialogs
   # POST /dialogs.xml
   def create
-    @dialog = @story.dialogs.new(params[:dialog])
+    @dialog = Dialog.new(params[:dialog])
+    @dialog.story = @story
+#    @dialog = @story.dialogs.new(params[:dialog])
 
     respond_to do |format|
       if @dialog.save
