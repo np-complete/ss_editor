@@ -1,0 +1,5 @@
+before_script:
+  - 'rake db:migrate'
+  - 'rake db:test:prepare'
+rvm:
+  - 1.9.3
