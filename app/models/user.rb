@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  devise :omniauthable
+
   validates_presence_of :name, :openid_url
   validates_uniqueness_of :openid_url
 

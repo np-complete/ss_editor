@@ -3,87 +3,81 @@ require 'spec_helper'
 
 describe UsersController do
   describe "GET index" do
+    let!(:users) { FactoryGirl.create_list(:user, 3) }
     it "assigns all users as @users" do
-      User.stub(:all) { [mock_user] }
       get :index
-      assigns(:users).should eq([mock_user])
+      assigns(:users).should == users
     end
   end
 
   describe "GET show" do
+    let(:user) { FactoryGirl.create(:user) }
     it "assigns the requested user as @user" do
-      User.stub(:find).with("37") { mock_user }
-      get :show, :id => "37"
-      assigns(:user).should be(mock_user)
+      get :show, :id => user.id
+      assigns(:user).should == user
     end
   end
 
   describe "GET new" do
-    before do
-      controller.stub(:login?) { false }
-    end
+    before { controller.stub(:user_signed_in?).and_return(false) }
 
     it "assigns a new user as @user" do
-      controller.stub(:login?) { false }
-      controller.stub(:identify?) { true }
-      User.stub(:new) { mock_user }
+      User.stub(:new).and_return(:new_user)
       get :new
-      assigns(:user).should be(mock_user)
+      assigns(:user).should == :new_user
     end
   end
 
   describe "GET edit" do
-    it "login? がfalseならリダイレクト" do
-      controller.stub(:login?) { false }
-      get :edit, :id => "37"
-      response.should redirect_to(root_path)
-    end
-    it "assigns the requested user as @user" do
-      controller.stub(:login?) { true }
-      User.stub(:find).with("37") { mock_user }
-      get :edit, :id => "37"
-      assigns(:user).should be(mock_user)
+    let(:user) { FactoryGirl.create(:user) }
+    context :user_signed_in do
+      before { sign_in user }
+      it "assigns the requested user as @user" do
+        get :edit, :id => user.id + 1
+        assigns(:user).should == user
+      end
     end
   end
 
   describe "POST create" do
-    before do
-      controller.stub(:login?) { false }
-      controller.stub(:identify?) { true }
-      controller.session[:identity_url] = 'authauth'
-    end
+    before { controller.session[:identity_url] = 'authauth' }
 
-    it "login? がtrueならエラー" do
-      controller.stub(:login?) { true }
-      User.should_not_receive(:new)
-      post :create
-      response.should render_template('shared/access_failure')
+    context :sined_in do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+      it "エラー" do
+        User.should_not_receive(:new)
+        post :create
+        response.should render_template('shared/access_failure')
+      end
     end
 
     describe "with valid params" do
+      let!(:new_user) { FactoryGirl.build(:user) }
+      before do
+        User.stub(:new).and_return(new_user)
+        User.any_instance.stub(:save).and_return(true)
+      end
       it "assigns a newly created user as @user" do
-        User.stub(:new).with({'these' => 'params'}) { mock_user(:save => true) }
-        mock_user.should_receive(:openid_url=).with('authauth')
+        User.stub(:new).with({'these' => 'params'}).and_return(new_user)
+        new_user.should_receive(:openid_url=).with('authauth')
         post :create, :user => {'these' => 'params'}
-        assigns(:user).should be(mock_user)
+        assigns(:user).should == new_user
       end
 
       it "redirects to the created user" do
-        User.stub(:new) { mock_user(:save => true, :openid_url= => true) }
         post :create, :user => {}
-        response.should redirect_to(user_url(mock_user))
+        response.should redirect_to([new_user])
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved user as @user" do
-        User.stub(:new).with({'these' => 'params'}) { mock_user(:save => false, :openid_url= => true) }
-        post :create, :user => {'these' => 'params'}
-        assigns(:user).should be(mock_user)
+      before { User.any_instance.stub(:save).and_return(false) }
+      it "not saved" do
+        post :create, :user => {}
+        assigns(:user).should be_a_new_record
       end
-
       it "re-renders the 'new' template" do
-        User.stub(:new) { mock_user(:save => false, :openid_url= => true) }
         post :create, :user => {}
         response.should render_template("new")
       end
@@ -91,53 +85,39 @@ describe UsersController do
   end
 
   describe "PUT update" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { sign_in user }
     describe "with valid params" do
-      it "updates the requested user" do
-        User.stub(:find).with("37") { mock_user }
-        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :user => {'these' => 'params'}
+      before { User.any_instance.stub(:update_attributes).and_return(true) }
+
+      it "assigns the current_user as @user" do
+        put :update, :id => user.id + 1
+        assigns(:user).should == user
       end
 
-      it "assigns the requested user as @user" do
-        User.stub(:find) { mock_user(:update_attributes => true) }
-        put :update, :id => "1"
-        assigns(:user).should be(mock_user)
+      it "updates the user" do
+        controller.stub(:current_user).and_return(user)
+        user.should_receive(:update_attributes).with({'these' => 'params'}).and_return(true)
+        put :update, :id => user.id, :user => {'these' => 'params'}
       end
 
       it "redirects to the user" do
-        User.stub(:find) { mock_user(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(user_url(mock_user))
+        put :update, :id => user.id
+        response.should redirect_to([user])
       end
     end
 
     describe "with invalid params" do
-      it "assigns the user as @user" do
-        User.stub(:find) { mock_user(:update_attributes => false) }
-        put :update, :id => "1"
-        assigns(:user).should be(mock_user)
-      end
+      before { User.any_instance.stub(:update_attributes).and_return(false) }
 
       it "re-renders the 'edit' template" do
-        User.stub(:find) { mock_user(:update_attributes => false) }
-        put :update, :id => "1"
+        put :update, :id => user.id
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested user" do
-      User.stub(:find).with("37") { mock_user }
-      mock_user.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
-
-    it "redirects to the users list" do
-      User.stub(:find) { mock_user }
-      delete :destroy, :id => "1"
-      response.should redirect_to(users_url)
-    end
   end
 
 end
