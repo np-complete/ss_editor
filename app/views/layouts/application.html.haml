@@ -2,10 +2,8 @@
 %html
   %head
     %meta(charset="utf-8")
-    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %title= "SS park"
     = csrf_meta_tags
-    = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
     %link(href="images/favicon.ico" rel="shortcut icon")
 
@@ -26,14 +24,16 @@
                 %li= link_to 'characters', :characters
               %ul.nav.pull-right
                 - if user_signed_in?
-                  %li= link_to current_user.name, :dashboard
-                  %li= link_to 'ダッシュボード', :dashboard
-                  %li= link_to 'ログアウト', :logout
+                  %li.dropdown
+                    %a#user_menu(href="#" role="button" class="dropdown-toggle" data-toggle="dropdown")
+                      = current_user.name
+                      %b.caret
+                    %ul.dropdown-menu(role="menu" aria-labelledby="user_menu")
+                      %li= link_to 'ダッシュボード', :dashboard, :tabindex => "-1"
+                      %li= link_to '編集', [:edit, current_user], :tabindex => "-1"
+                      %li= link_to 'ログアウト', :logout, :tabindex => "-1"
                 - else
-                  %li
-                    %strong ログインしていません
                   %li= link_to 'ログイン', user_omniauth_authorize_path(:google)
-
     .container
       .content
         .row
@@ -41,10 +41,4 @@
             = bootstrap_flash
             = yield
 
-
-    %footer
-    /
-      Javascripts
-      \==================================================
-    / Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"
+= javascript_include_tag "application"
