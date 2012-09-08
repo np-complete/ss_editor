@@ -14,6 +14,9 @@ gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
 
+gem 'devise'
+gem 'omniauth-openid'
+
 group :assets do
   gem 'coffee-rails'
   gem 'sass-rails'
