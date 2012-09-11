@@ -102,13 +102,13 @@ class DialogsController < ApplicationController
   def change_faces
     @faces = params[:character_id].present? ?  @faces = Character.find(params[:character_id]).faces : []
 
-    render :update do |page|
-      page.replace_html :dialog_face_id, options_for_select(@faces.map{|x| [x.name, x.id]})
+    respond_to do |format|
+      format.json { render :json => @faces, :root => nil, :only => [:id, :name] }
     end
   end
 
   private
   def check_my_story
-    access_controll(lambda{ @auth.id == @story.user_id })
+    access_controll(lambda{ current_user.id == @story.user_id })
   end
 end
