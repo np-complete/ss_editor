@@ -1,15 +1,18 @@
 %h1 DASHBOARD
 
 %h2 YOUR STORIES
-%table
+%table.table.table-striped
   - @stories.each do |story|
     %tr
       %td
         = story.title
       %td
         = link_to 'Show', story
+      %td
         = link_to 'Dialogs', [story, :dialogs]
+      %td
         = link_to 'Edit', [:edit, story]
+      %td
         = link_to 'Delete', story, :method => :delete, :confirm => "本当に消すよ?"
 = link_to "new", [:new, :story]
 

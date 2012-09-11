@@ -1,26 +1,44 @@
 !!! 5
-%title SS Editor
-= stylesheet_link_tag "application"
+%html
+  %head
+    %meta(charset="utf-8")
+    %title= "SS park"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all"
+    %link(href="images/favicon.ico" rel="shortcut icon")
+
+
+  %body
+    %nav(role="navigation")
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            = link_to "SS park", root_path, :class => 'brand'
+            .container.nav-collapse
+              %ul.nav
+                %li= link_to 'stories', :stories
+                %li= link_to 'characters', :characters
+              %ul.nav.pull-right
+                - if user_signed_in?
+                  %li.dropdown
+                    %a#user_menu(href="#" role="button" class="dropdown-toggle" data-toggle="dropdown")
+                      = current_user.name
+                      %b.caret
+                    %ul.dropdown-menu(role="menu" aria-labelledby="user_menu")
+                      %li= link_to 'ダッシュボード', :dashboard, :tabindex => "-1"
+                      %li= link_to '編集', [:edit, current_user], :tabindex => "-1"
+                      %li= link_to 'ログアウト', :logout, :tabindex => "-1"
+                - else
+                  %li= link_to 'ログイン', user_omniauth_authorize_path(:google)
+    .container
+      .content
+        .row
+          #main
+            = bootstrap_flash
+            = yield
+
 = javascript_include_tag "application"
-= csrf_meta_tag
-
-%header
-  %h1#logo= link_to 'SS Editor', :root
-  #status
-    - if user_signed_in?
-      %strong= current_user.name
-      |
-      = link_to 'ダッシュボード', :dashboard
-      |
-      = link_to 'ログアウト', :logout
-      - else
-      %strong ログインしていません
-      |
-      = link_to 'ログイン', user_omniauth_authorize_path(:google)
-  %nav
-    %ul
-      %li= link_to 'stories', :stories
-      %li= link_to 'characters', :characters
-#main
-  = yield
-
