@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
+gem 'simple_form'
 
 gem 'devise'
 gem 'omniauth-openid'
