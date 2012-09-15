@@ -9,10 +9,11 @@ gem 'ruby-openid-apps-discovery'
 gem 'dynamic_form'
 gem 'gravatar_image_tag'
 gem 'paperclip'
-gem 'prototype-rails'
+gem 'jquery-rails'
 gem 'unicorn'
 gem 'haml'
 gem 'haml-rails'
+gem 'simple_form'
 
 gem 'devise'
 gem 'omniauth-openid'
@@ -21,6 +22,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'sass-rails'
   gem 'uglifier'
+  gem 'twitter-bootstrap-rails'
 end
 
 group :test, :development do

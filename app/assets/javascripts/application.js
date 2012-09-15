@@ -1,5 +1,5 @@
-//= require prototype
-//= require prototype_ujs
-//= require effects
-//= require dragdrop
-//= require controls
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require twitter/bootstrap
+//= require editor

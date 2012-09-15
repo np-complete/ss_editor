@@ -2,6 +2,10 @@
   = @story.title
   Listing dialogs
 
+Story:
+= link_to 'Show', @story
+= link_to 'Edit', [:edit, @story]
+
 - if @dialogs.length > 0
   #dialogs.admin_dialogs
     - @dialogs.each do |dialog|
@@ -12,9 +16,6 @@
         %footer
           = link_to 'Edit', [:edit, @story, dialog]
           = link_to 'Destroy', [@story, dialog], :confirm => 'Are you sure?', :method => :delete
-  = sortable_element :dialogs, :tag => :div, :url => [:update_orders, @story, :dialogs], :method => :put
-
-.boxed_form
-  %h1 New dialog
-  = render :partial => 'form'
+%h1 New dialog
+= render :partial => 'form'
 
