@@ -1,5 +1,6 @@
 working_directory '/home/masaki/www/ss_editor/current'
-listen '/tmp/unicorn_of_ss-park.sock'
+
+listen File.join(working_directory, 'tmp/pids/.sock')
 
 stderr_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
 stdout_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
