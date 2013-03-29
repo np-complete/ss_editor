@@ -1,4 +1,3 @@
-
 source 'http://rubygems.org'
 
 gem 'rails'
@@ -35,7 +34,15 @@ group :test, :development do
   gem "guard-spork"
   gem "guard-bundler"
   gem "pry"
+  gem "pry-doc"
   gem "factory_girl_rails"
+
+  gem "rb-inotify", :require => false
+  gem "rb-fsevent", :require => false
+  gem "rb-fchange", :require => false
+
+  gem "growl", :require => false
+  gem "libnotify", :require => false
 end
 
 group :production do
