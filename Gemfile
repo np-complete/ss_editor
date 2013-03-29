@@ -22,6 +22,8 @@ group :assets do
   gem 'sass-rails'
   gem 'uglifier'
   gem 'twitter-bootstrap-rails'
+  gem 'therubyracer'
+  gem 'less-rails'
 end
 
 group :test, :development do
