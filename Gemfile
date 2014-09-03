@@ -1,7 +1,8 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
+ruby '2.1.2'
 
-gem 'rails'
-
+gem 'rails', '3.2.13'
+gem 'rake'
 gem 'parent_resource'
 gem 'rack-openid'
 gem 'ruby-openid-apps-discovery'
@@ -28,6 +29,7 @@ end
 
 group :test, :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'rspec', '< 3'
   gem "rspec-rails"
   gem "auto_mock"
   gem "webrat"
@@ -49,6 +51,7 @@ end
 
 group :production do
   gem 'mysql2'
+  gem 'rails_12factor'
 end
 
 group :development do
